@@ -6,14 +6,18 @@
   "build": {
     "targetFolder": "dist",
     "sourceFolder": "webapp",
-    "buildRequired": false,
-    "lastBuildDateTime": "Thu, 04 Aug 2016 13:49:40 GMT"
+    "buildRequired": true
   },
   "generation": [
     {
       "templateId": "fioriexttemplate.extensionProject",
       "templateVersion": "1.4.0",
       "dateTimeStamp": "Thu, 04 Aug 2016 13:46:07 GMT"
+    },
+    {
+      "templateId": "fioriexttemplate.i18ncomponent",
+      "templateVersion": "1.4.0",
+      "dateTimeStamp": "Thu, 04 Aug 2016 13:52:00 GMT"
     }
   ],
   "codeCheckingTriggers": {
