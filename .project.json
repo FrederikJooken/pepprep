@@ -18,6 +18,11 @@
       "templateId": "fioriexttemplate.i18ncomponent",
       "templateVersion": "1.4.0",
       "dateTimeStamp": "Thu, 04 Aug 2016 13:52:00 GMT"
+    },
+    {
+      "templateId": "fioriexttemplate.replaceservicecomponent",
+      "templateVersion": "1.4.0",
+      "dateTimeStamp": "Thu, 04 Aug 2016 14:09:18 GMT"
     }
   ],
   "codeCheckingTriggers": {
@@ -40,7 +45,7 @@
     }
   },
   "mockpreview": {
-    "mockUri": "/sap/opu/odata/sap/HCM_PEOPLE_PROFILE_SRV/",
+    "mockUri": "/sap/opu/odata/sap/ZBM2_PEOPLE_PROFILE_SRV",
     "metadataFilePath": "",
     "loadJSONFiles": false,
     "loadCustomRequests": false,

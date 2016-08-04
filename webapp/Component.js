@@ -13,7 +13,13 @@ this.hcm.people.profile.Component.extend("hcm.people.profile.ZHCM_PEP_PROFILEExt
 		config: {
 			"sap.ca.i18Nconfigs": {
 				"bundleName": "hcm.people.profile.ZHCM_PEP_PROFILEExt.i18n.i18n"
-			}
+			},
+			"sap.ca.serviceConfigs": [{
+				"name": "HCM_PEOPLE_PROFILE_SRV",
+				"serviceUrl": "/sap/opu/odata/sap/ZBM2_PEOPLE_PROFILE_SRV/",
+				"isDefault": true,
+				"mockedDataSource": "./localService/metadata.xml"
+			}]
 		},
 		customizing: {}
 	}
