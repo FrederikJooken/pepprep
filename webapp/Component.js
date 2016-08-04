@@ -1,3 +1,4 @@
+jQuery.sap.registerModulePath("sap.hcm.lib.common", "/sap/bc/ui5_ui5/sap/hcm_common/sap/hcm/lib/common");
 jQuery.sap.declare("hcm.people.profile.ZHCM_PEP_PROFILEExt.Component");
 
 // use the load function for getting the optimized preload file if present

@@ -6,7 +6,8 @@
   "build": {
     "targetFolder": "dist",
     "sourceFolder": "webapp",
-    "buildRequired": true
+    "buildRequired": false,
+    "lastBuildDateTime": "Thu, 04 Aug 2016 13:49:40 GMT"
   },
   "generation": [
     {
@@ -99,5 +100,9 @@
     "namespace": "hcm.people.profile",
     "resourceBundle": "i18n/i18n.properties",
     "parentResourceRootUrl": "/destinations/GBD/sap/bc/ui5_ui5/sap/HCM_PEP_PROFILE"
+  },
+  "deploy": {
+    "destination": "GBD",
+    "name": "ZHCM_PEOP_PROF"
   }
 }
