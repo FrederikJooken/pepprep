@@ -1,0 +1,103 @@
+{
+  "projectType": [
+    "com.watt.common.builder.sapui5clientbuild",
+    "sap.watt.uitools.ide.fiori"
+  ],
+  "build": {
+    "targetFolder": "dist",
+    "sourceFolder": "webapp",
+    "buildRequired": true
+  },
+  "generation": [
+    {
+      "templateId": "fioriexttemplate.extensionProject",
+      "templateVersion": "1.4.0",
+      "dateTimeStamp": "Thu, 04 Aug 2016 13:46:07 GMT"
+    }
+  ],
+  "codeCheckingTriggers": {
+    "notifyBeforePush": true,
+    "notifyBeforePushLevel": "Error",
+    "blockPush": false,
+    "blockPushLevel": "Error"
+  },
+  "translation": {
+    "translationDomain": "",
+    "supportedLanguages": "en,fr,de",
+    "defaultLanguage": "en",
+    "defaultI18NPropertyFile": "i18n.properties",
+    "resourceModelName": "i18n"
+  },
+  "basevalidator": {
+    "services": {
+      "xml": "fioriXmlAnalysis",
+      "js": "fioriJsValidator"
+    }
+  },
+  "mockpreview": {
+    "mockUri": "/sap/opu/odata/sap/HCM_PEOPLE_PROFILE_SRV/",
+    "metadataFilePath": "",
+    "loadJSONFiles": false,
+    "loadCustomRequests": false,
+    "mockRequestsFilePath": ""
+  },
+  "extensibility": {
+    "controllers": {
+      "Main": "HCM_PEP_PROFILE%2fMain.controller.js",
+      "CourcesCollapsedController": "HCM_PEP_PROFILE%2fblocks%2fCourcesCollapsedController.controller.js",
+      "CourcesExpandedController": "HCM_PEP_PROFILE%2fblocks%2fCourcesExpandedController.controller.js",
+      "NotesController": "HCM_PEP_PROFILE%2fblocks%2fNotesController.controller.js",
+      "NotificationsCollapsedController": "HCM_PEP_PROFILE%2fblocks%2fNotificationsCollapsedController.controller.js",
+      "NotificationsExpandedController": "HCM_PEP_PROFILE%2fblocks%2fNotificationsExpandedController.controller.js",
+      "PayslipCollapsedController": "HCM_PEP_PROFILE%2fblocks%2fPayslipCollapsedController.controller.js",
+      "PayslipExpandedController": "HCM_PEP_PROFILE%2fblocks%2fPayslipExpandedController.controller.js",
+      "PerformanceCollapsedController": "HCM_PEP_PROFILE%2fblocks%2fPerformanceCollapsedController.controller.js",
+      "PerformanceExpandedController": "HCM_PEP_PROFILE%2fblocks%2fPerformanceExpandedController.controller.js",
+      "PersInfoController": "HCM_PEP_PROFILE%2fblocks%2fPersInfoController.controller.js",
+      "ProgressionController": "HCM_PEP_PROFILE%2fblocks%2fProgressionController.controller.js",
+      "QualificationsCollapsedController": "HCM_PEP_PROFILE%2fblocks%2fQualificationsCollapsedController.controller.js",
+      "QualificationsExpandedController": "HCM_PEP_PROFILE%2fblocks%2fQualificationsExpandedController.controller.js",
+      "SalaryController": "HCM_PEP_PROFILE%2fblocks%2fSalaryController.controller.js",
+      "TimeBalanceController": "HCM_PEP_PROFILE%2fblocks%2fTimeBalanceController.controller.js",
+      "TimeRecordingController": "HCM_PEP_PROFILE%2fblocks%2fTimeRecordingController.controller.js",
+      "VacationsController": "HCM_PEP_PROFILE%2fblocks%2fVacationsController.controller.js",
+      "Profile": "HCM_PEP_PROFILE%2fview%2fProfile.controller.js"
+    },
+    "views": {
+      "Main": "HCM_PEP_PROFILE%2fMain.view.xml",
+      "CourcesCollapsed": "HCM_PEP_PROFILE%2fblocks%2fCourcesCollapsed.view.xml",
+      "CourcesExpanded": "HCM_PEP_PROFILE%2fblocks%2fCourcesExpanded.view.xml",
+      "Notes": "HCM_PEP_PROFILE%2fblocks%2fNotes.view.xml",
+      "NotificationsCollapsed": "HCM_PEP_PROFILE%2fblocks%2fNotificationsCollapsed.view.xml",
+      "NotificationsExpanded": "HCM_PEP_PROFILE%2fblocks%2fNotificationsExpanded.view.xml",
+      "PayslipCollapsed": "HCM_PEP_PROFILE%2fblocks%2fPayslipCollapsed.view.xml",
+      "PayslipExpanded": "HCM_PEP_PROFILE%2fblocks%2fPayslipExpanded.view.xml",
+      "PerformanceCollapsed": "HCM_PEP_PROFILE%2fblocks%2fPerformanceCollapsed.view.xml",
+      "PerformanceExpanded": "HCM_PEP_PROFILE%2fblocks%2fPerformanceExpanded.view.xml",
+      "PersInfo": "HCM_PEP_PROFILE%2fblocks%2fPersInfo.view.xml",
+      "Progression": "HCM_PEP_PROFILE%2fblocks%2fProgression.view.xml",
+      "QualificationsCollapsed": "HCM_PEP_PROFILE%2fblocks%2fQualificationsCollapsed.view.xml",
+      "QualificationsExpanded": "HCM_PEP_PROFILE%2fblocks%2fQualificationsExpanded.view.xml",
+      "Salary": "HCM_PEP_PROFILE%2fblocks%2fSalary.view.xml",
+      "TimeBalance": "HCM_PEP_PROFILE%2fblocks%2fTimeBalance.view.xml",
+      "TimeRecording": "HCM_PEP_PROFILE%2fblocks%2fTimeRecording.view.xml",
+      "Vacations": "HCM_PEP_PROFILE%2fblocks%2fVacations.view.xml",
+      "Profile": "HCM_PEP_PROFILE%2fview%2fProfile.view.xml"
+    },
+    "fragments": {},
+    "type": "abaprep",
+    "shouldLinkComponentToManifest": false,
+    "component": "HCM_PEP_PROFILE%2fComponent.js",
+    "configuration": "HCM_PEP_PROFILE%2fConfiguration.js",
+    "versionJsonPath": "HCM_PEP_PROFILE%2fversion.json",
+    "system": {
+      "name": "GBD",
+      "proxyUrlPrefix": "/destinations/GBD",
+      "sapClient": ""
+    },
+    "BSPName": "HCM_PEP_PROFILE",
+    "namespace": "hcm.people.profile",
+    "resourceBundle": "i18n/i18n.properties",
+    "parentResourceRootUrl": "/destinations/GBD/sap/bc/ui5_ui5/sap/HCM_PEP_PROFILE"
+  }
+}
