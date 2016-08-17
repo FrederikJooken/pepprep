@@ -6,8 +6,8 @@
   "build": {
     "targetFolder": "dist",
     "sourceFolder": "webapp",
-    "buildRequired": false,
-    "lastBuildDateTime": "Fri, 12 Aug 2016 14:20:29 GMT"
+    "buildRequired": true,
+    "lastBuildDateTime": "Wed, 17 Aug 2016 11:25:57 GMT"
   },
   "generation": [
     {
@@ -24,6 +24,11 @@
       "templateId": "fioriexttemplate.replaceservicecomponent",
       "templateVersion": "1.4.0",
       "dateTimeStamp": "Thu, 04 Aug 2016 14:09:18 GMT"
+    },
+    {
+      "templateId": "fioriexttemplate.extendcontrollercomponent",
+      "templateVersion": "1.4.0",
+      "dateTimeStamp": "Tue, 16 Aug 2016 09:30:32 GMT"
     }
   ],
   "codeCheckingTriggers": {

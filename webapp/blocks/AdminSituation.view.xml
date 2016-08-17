@@ -1,0 +1,22 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<mvc:View
+        xmlns:core="sap.ui.core"
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns:layout="sap.ui.layout"
+        xmlns:f="sap.ui.layout.form"
+        xmlns:m="sap.m"
+        xmlns:suite="sap.suite.ui.commons" 
+        controllerName="hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationController">
+	
+        
+        <!--<layout:Grid id="ctrlPersInfoHolder" width="100%" defaultSpan="L6 M6 S12">-->
+
+        <!--</layout:Grid> -->
+        
+        <m:Label id="dispStatusMsg" visible="false" design="Bold" width="100%"></m:Label>
+ 
+</mvc:View>
