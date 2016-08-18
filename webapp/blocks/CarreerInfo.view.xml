@@ -5,7 +5,7 @@
         xmlns:f="sap.ui.layout.form"
         xmlns:m="sap.m"
         xmlns:suite="sap.suite.ui.commons" 
-        controllerName="hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationController">
+        controllerName="hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerInfoController">
 	
         <!--<layout:Grid id="ctrlPersInfoHolder" width="100%" defaultSpan="L6 M6 S12">-->
 

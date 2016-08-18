@@ -4,6 +4,10 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 
 	var _objSubSecAdminSituation = null;
 	var _objSecAdminSituation = null;
+	
+	var _objSubSecCarreerInfo = null;
+	var _objSecCarreerInfo = null;
+	
 
 	return {
 
@@ -21,6 +25,22 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 
 		getSecAdminSituation: function() {
 			return _objSecAdminSituation;
+		},
+		
+		setSubSecCarreerInfo: function(objSubSecCarreerInfo) {
+			_objSubSecCarreerInfo = objSubSecCarreerInfo;
+		},
+
+		getSubSecCarreerInfo: function() {
+			return _objSubSecCarreerInfo;
+		},
+
+		setSecCarreerInfo: function(objSecCarreerInfo) {
+			_objSecCarreerInfo = objSecCarreerInfo;
+		},
+
+		getSecCarreerInfo: function() {
+			return _objSecCarreerInfo;
 		}
 	};
 }());

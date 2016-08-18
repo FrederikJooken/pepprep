@@ -2,7 +2,7 @@ jQuery.sap.require("hcm.people.profile.util.UIHelper");
 jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper");
 jQuery.sap.require("sap.ui.layout.form.SimpleForm");
 
-sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationController", {
+sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerInfoController", {
 
 	onInit: function() {
 		this.buildUI();
@@ -15,32 +15,32 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationC
 		var _oUIHelper = hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper;
 
 		var oDataModel = hcm.people.profile.util.UIHelper.getODataModel();
-		var queryPath = "AdministrativeSituationSet";
+		var queryPath = "CarreerInfoSet";
 		oDataModel.read(queryPath, null, null, true, function(response) {
 
-			var adminSituationColl = response.results;
+			var carreerInfoColl = response.results;
 			var groupNameList = [];
 			var groupColl = [];
-			var secAdminSituation = _oUIHelper.getSecAdminSituation();
+			var secCarreerInfo = _oUIHelper.getSecCarreerInfo();
 			
-			if(adminSituationColl.length>0){
+			if(carreerInfoColl.length>0){
 
-    			adminSituationColl.forEach(function(adminSituationItem) {
+    			carreerInfoColl.forEach(function(carreerInfoItem) {
     			
-    				if (groupColl[adminSituationItem.Groupname]) {
-    					groupColl[adminSituationItem.Groupname].vals.push({
-    						"Fieldlabel": adminSituationItem.Fieldlabel,
-    						"Fieldvalue": adminSituationItem.Fieldvalue
+    				if (groupColl[carreerInfoItem.Groupname]) {
+    					groupColl[carreerInfoItem.Groupname].vals.push({
+    						"Fieldlabel": carreerInfoItem.Fieldlabel,
+    						"Fieldvalue": carreerInfoItem.Fieldvalue
     					});
     				} else {
-    					groupNameList.push(adminSituationItem.Groupname);
-    					groupColl[adminSituationItem.Groupname] = {
-    						"groupName": adminSituationItem.Groupname,
+    					groupNameList.push(carreerInfoItem.Groupname);
+    					groupColl[carreerInfoItem.Groupname] = {
+    						"groupName": carreerInfoItem.Groupname,
     						vals: []
     					};
-    					groupColl[adminSituationItem.Groupname].vals.push({
-    						"Fieldlabel": adminSituationItem.Fieldlabel,
-    						"Fieldvalue": adminSituationItem.Fieldvalue
+    					groupColl[carreerInfoItem.Groupname].vals.push({
+    						"Fieldlabel": carreerInfoItem.Fieldlabel,
+    						"Fieldvalue": carreerInfoItem.Fieldvalue
     					});
     				}
     			});
@@ -64,7 +64,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationC
     
     				if (!isSubSectionUsed) {
     
-    					var subSection = _oUIHelper.getSubSecAdminSituation();
+    					var subSection = _oUIHelper.getSubSecCarreerInfo();
     					subSection.setTitle(grpName);
     					subSection.insertBlock(ctrlSimpleForm);
     					isSubSectionUsed = true;
@@ -75,14 +75,14 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationC
     						title: grpName
     					});
     					oNewSubSection.insertBlock(ctrlSimpleForm);
-    					secAdminSituation.addSubSection(oNewSubSection);
+    					secCarreerInfo.addSubSection(oNewSubSection);
     
     				}
     
     			});
     			
 			}else{
-			    that.byId("dispStatusMsg").setText(hcm.people.profile.util.UIHelper.getResourceBundle().getText("ADMIN_SITUATION_NO_DATA"));
+			    that.byId("dispStatusMsg").setText(hcm.people.profile.util.UIHelper.getResourceBundle().getText("CARREER_INFO_NO_DATA"));
 			    that.byId("dispStatusMsg").setVisible(true);
 			}
 
