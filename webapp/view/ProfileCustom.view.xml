@@ -1,0 +1,73 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View xmlns:core="sap.ui.core" xmlns:layout="sap.ui.layout" xmlns:uxap="sap.uxap" xmlns:m="sap.m" xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:suite="sap.suite.ui.commons" xmlns:viz="sap.viz.ui5.controls" xmlns:bl="sap.uxap.blocks"
+	xmlns:pp="hcm.people.profile.blocks" controllerName="hcm.people.profile.view.Profile" xmlns:html="http://www.w3.org/1999/xhtml"
+	height="100%">
+	<uxap:ObjectPageLayout id="ctrlObjectPageLayout" subSectionLayout="TitleOnLeft" enableLazyLoading="true">
+		<uxap:headerTitle>
+			<uxap:ObjectPageHeader id="ctlrObjHeaderEmp" headerDesign="Light" objectImageShape="Circle" isObjectIconAlwaysVisible="false"
+				isObjectTitleAlwaysVisible="false" isObjectSubtitleAlwaysVisible="false" showPlaceholder="true">
+				<uxap:navigationBar>
+					<m:Bar>
+						<m:contentLeft>
+							<m:Button icon="sap-icon://nav-back" press="onBackPress" visible="false"></m:Button>
+						</m:contentLeft>
+						<m:contentMiddle>
+							<m:Text text="{i18n>PEOPLE_PROFILE}"/>
+						</m:contentMiddle>
+					</m:Bar>
+				</uxap:navigationBar>
+				<uxap:actions>
+					<uxap:ObjectPageHeaderActionButton icon="sap-icon://org-chart" tooltip="{i18n>EMPLOYEE_HIERARCHY}" press="onHierarchyPress" visible="false"/>
+					<m:Link id="incorrectDataLink" text="{i18n>INCORRECT_DATA}" press="onIncorrectDataLinkPress"/>
+					<!--<uxap:ObjectPageHeaderActionButton icon="sap-icon://action"/>-->
+				</uxap:actions>
+			</uxap:ObjectPageHeader>
+		</uxap:headerTitle>
+		<uxap:headerContent>
+			<layout:VerticalLayout>
+				<!--<layout:layoutData>-->
+				<!--    <uxap:ObjectPageHeaderLayoutData-->
+				<!--            width="25%" />-->
+				<!--</layout:layoutData>-->
+				<m:Image id="ctrlHeaderImage"></m:Image>
+			</layout:VerticalLayout>
+			<layout:VerticalLayout>
+				<!--<layout:layoutData>-->
+				<!--    <uxap:ObjectPageHeaderLayoutData-->
+				<!--            width="35%" />-->
+				<!--</layout:layoutData>-->
+				<m:ObjectHeader id="lblName"/>
+				<m:Label id="lblPosition"/>
+				<m:Label id="lblOrgUnit" visible="false"/> <!-- FJK - hide field -->
+				<m:Text id="lblIDF"/>
+				<m:Text id="lblEmpNo"/>
+			</layout:VerticalLayout>
+			<layout:VerticalLayout>
+				<!--<layout:layoutData>-->
+				<!--    <uxap:ObjectPageHeaderLayoutData-->
+				<!--            width="20%" />-->
+				<!--</layout:layoutData>-->
+				<m:Label id="lblLocation" visible="false"/>
+				<m:Link id="lblPhone" press="onPhoneClick" visible="false"/>
+				<m:Link id="lblEmail" press="onEmailClick" visible="false"/>
+				<layout:HorizontalLayout id="ctrlSocialMediaHolder"></layout:HorizontalLayout>
+			</layout:VerticalLayout>
+			<layout:VerticalLayout>
+				<!--<layout:layoutData>-->
+				<!--    <uxap:ObjectPageHeaderLayoutData-->
+				<!--            width="20%" />-->
+				<!--</layout:layoutData>-->
+				<m:Label id="lblCountryLocation" visible="false"/>
+				<m:Label id="lblTime" visible="false"/>
+			</layout:VerticalLayout>
+			<!-- extension point for header content -->
+			<core:ExtensionPoint name="headerField"></core:ExtensionPoint>
+		</uxap:headerContent>
+		<uxap:sections></uxap:sections>
+	</uxap:ObjectPageLayout>
+</core:View>

@@ -13,8 +13,7 @@ this.hcm.people.profile.Component.extend("hcm.people.profile.ZHCM_PEP_PROFILEExt
 		config: {
 			"sap.ca.i18Nconfigs": {
 				"bundleName": "hcm.people.profile.ZHCM_PEP_PROFILEExt.i18n.i18n"
-			}
-			,
+			},
 			"sap.ca.serviceConfigs": [{
 				"name": "HCM_PEOPLE_PROFILE_SRV",
 				"serviceUrl": "/sap/opu/odata/sap/ZBM2_PEOPLE_PROFILE_SRV/",
@@ -26,6 +25,12 @@ this.hcm.people.profile.Component.extend("hcm.people.profile.ZHCM_PEP_PROFILEExt
 			"sap.ui.controllerExtensions": {
 				"hcm.people.profile.view.Profile": {
 					"controllerName": "hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom"
+				}
+			},
+			"sap.ui.viewReplacements": {
+				"hcm.people.profile.view.Profile": {
+					"viewName": "hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom",
+					"type": "XML"
 				}
 			}
 		}
