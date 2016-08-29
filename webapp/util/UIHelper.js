@@ -2,13 +2,59 @@ jQuery.sap.declare("hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper");
 
 hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 
+	// oData collection results
+	var _oAdminSituationData = null;
+	var _oCarreerInfoData = null;
+	
+	// Grouped oData collection results
+	var _oGroupedCarreerInfoData;
+
+	var _objSecCarreerInfo = null;
+
+	// Carreer info sub sections
+	var _objSubSecCarreerInfo = null;
+
+	var _objSubSecCarreerAdminData = null;
+	var _objSubSecCarreerRemuneration = null;
+	var _objSubSecCarreerGrade = null;
+	var _objSubSecCarreerDisciplinary = null;
+
 	var _objSubSecAdminSituation = null;
 	var _objSecAdminSituation = null;
 
-	var _objSubSecCarreerInfo = null;
-	var _objSecCarreerInfo = null;
-
 	return {
+
+		setSubSecCarreerAdminData: function(objSubSecCarreerAdminData) {
+			_objSubSecCarreerAdminData = objSubSecCarreerAdminData;
+		},
+
+		getSubSecCarreerAdminData: function() {
+			return _objSubSecCarreerAdminData;
+		},
+
+		setSubSecCarreerRemuneration: function(objSubSecCarreerRemuneration) {
+			_objSubSecCarreerRemuneration = objSubSecCarreerRemuneration;
+		},
+
+		getSubSecCarreerRemuneration: function() {
+			return _objSubSecCarreerRemuneration;
+		},
+
+		setSubSecCarreerGrade: function(objSubSecCarreerGrade) {
+			_objSubSecCarreerGrade = objSubSecCarreerGrade;
+		},
+
+		getSubSecCarreerGrade: function() {
+			return _objSubSecCarreerGrade;
+		},
+
+		setSubSecCarreerDisciplinary: function(objSubSecCarreerDisciplinary) {
+			_objSubSecCarreerDisciplinary = objSubSecCarreerDisciplinary;
+		},
+
+		getSubSecCarreerDisciplinary: function() {
+			return _objSubSecCarreerDisciplinary;
+		},
 
 		setSubSecAdminSituation: function(objSubSecAdminSituation) {
 			_objSubSecAdminSituation = objSubSecAdminSituation;
@@ -40,6 +86,58 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 
 		getSecCarreerInfo: function() {
 			return _objSecCarreerInfo;
+		},
+
+		setAdminSituationData: function(oAdminSituationData) {
+			_oAdminSituationData = oAdminSituationData;
+		},
+
+		getAdminSituationData: function() {
+			return _oAdminSituationData;
+		},
+
+		setCarreerInfoData: function(oCarreerInfoData) {
+			_oCarreerInfoData = oCarreerInfoData;
+		},
+
+		getCarreerInfoData: function() {
+			return _oCarreerInfoData;
+		},
+
+		setGroupedCarreerInfoData: function(oGroupedCarreerInfoData) {
+			_oGroupedCarreerInfoData = oGroupedCarreerInfoData;
+		},
+
+		getGroupedCarreerInfoData: function() {
+			return _oGroupedCarreerInfoData;
+		},
+
+		groupCollectionItems: function(collectionToBeSorted) {
+			var groupedColl = [];
+			if (collectionToBeSorted.length > 0) {
+
+				collectionToBeSorted.forEach(function(collectionItem) {
+
+					if (groupedColl[collectionItem.Zzpos]) {
+						groupedColl[collectionItem.Zzpos].vals.push({
+							"Fieldlabel": collectionItem.Fieldlabel,
+							"Fieldvalue": collectionItem.Fieldvalue,
+							"GroupName": collectionItem.Groupname
+						});
+					} else {
+						groupedColl[collectionItem.Zzpos] = {
+							"Zzpos": collectionItem.Zzpos,
+							vals: []
+						};
+						groupedColl[collectionItem.Zzpos].vals.push({
+							"Fieldlabel": collectionItem.Fieldlabel,
+							"Fieldvalue": collectionItem.Fieldvalue,
+							"GroupName": collectionItem.Groupname
+						});
+					}
+				});
+			}
+			return groupedColl;
 		},
 
 		sendEmail: function(subject, body, cc) {

@@ -6,17 +6,17 @@ sap.uxap.BlockBase.extend("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSi
     metadata: {
         views: {
             Collapsed: {
-                viewName: "hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituation",
+                viewName: "hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationCollapsed",
                 type: "XML"
             },
             Expanded: {
-                viewName: "hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituation",
+                viewName: "hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationExpanded",
                 type: "XML"
             }
         },
         properties: {
            "columnLayout" : {type: "sap.uxap.BlockBaseColumnLayout", group: "Behavior", defaultValue: "2"}
-           // ,"showSubSectionMore": true
         }
     }
 });
+

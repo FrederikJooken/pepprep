@@ -2,7 +2,7 @@ jQuery.sap.require("hcm.people.profile.util.UIHelper");
 jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper");
 jQuery.sap.require("sap.ui.layout.form.SimpleForm");
 
-sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerInfoController", {
+sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationCollapsedController", {
 
 	onInit: function() {
 		this.buildUI();
@@ -15,32 +15,40 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerInfoCont
 		var _oUIHelper = hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper;
 
 		var oDataModel = hcm.people.profile.util.UIHelper.getODataModel();
-		var queryPath = "CarreerInfoSet";
+		var _oCtrlAdminSituationContainter = this.byId("ctrlAdminSituationContainer");
+		var queryPath = "AdministrativeSituationSet";
 		oDataModel.read(queryPath, null, null, true, function(response) {
 
-			var carreerInfoColl = response.results;
+			var adminSituationColl = response.results;
 			var groupNameList = [];
 			var groupColl = [];
-			var secCarreerInfo = _oUIHelper.getSecCarreerInfo();
+			var secAdminSituation = _oUIHelper.getSecAdminSituation();
 			
-			if(carreerInfoColl.length>0){
+			if(adminSituationColl.length>0){
+	//		if(adminSituationColl.length>3){
 
-    			carreerInfoColl.forEach(function(carreerInfoItem) {
+			//test FJK
+		/*	var subSecAdminSituation = hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper.getSubSecAdminSituation();
+			
+			subSecAdminSituation.getBlocks()[0].setShowSubSectionMore(true);*/
+			//end test FJK
+		
+    			adminSituationColl.forEach(function(adminSituationItem) {
     			
-    				if (groupColl[carreerInfoItem.Groupname]) {
-    					groupColl[carreerInfoItem.Groupname].vals.push({
-    						"Fieldlabel": carreerInfoItem.Fieldlabel,
-    						"Fieldvalue": carreerInfoItem.Fieldvalue
+    				if (groupColl[adminSituationItem.Groupname]) {
+    					groupColl[adminSituationItem.Groupname].vals.push({
+    						"Fieldlabel": adminSituationItem.Fieldlabel,
+    						"Fieldvalue": adminSituationItem.Fieldvalue
     					});
     				} else {
-    					groupNameList.push(carreerInfoItem.Groupname);
-    					groupColl[carreerInfoItem.Groupname] = {
-    						"groupName": carreerInfoItem.Groupname,
+    					groupNameList.push(adminSituationItem.Groupname);
+    					groupColl[adminSituationItem.Groupname] = {
+    						"groupName": adminSituationItem.Groupname,
     						vals: []
     					};
-    					groupColl[carreerInfoItem.Groupname].vals.push({
-    						"Fieldlabel": carreerInfoItem.Fieldlabel,
-    						"Fieldvalue": carreerInfoItem.Fieldvalue
+    					groupColl[adminSituationItem.Groupname].vals.push({
+    						"Fieldlabel": adminSituationItem.Fieldlabel,
+    						"Fieldvalue": adminSituationItem.Fieldvalue
     					});
     				}
     			});
@@ -48,7 +56,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerInfoCont
     			groupNameList.forEach(function(grpName) {
     
     				var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
-    					maxContainerCols: 2,
+    					maxContainerCols: 4,
     					editable: false,
     					layout: "ResponsiveGridLayout"
     				});
@@ -64,9 +72,10 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerInfoCont
     
     				if (!isSubSectionUsed) {
     
-    					var subSection = _oUIHelper.getSubSecCarreerInfo();
+    					var subSection = _oUIHelper.getSubSecAdminSituation();
     					subSection.setTitle(grpName);
     					subSection.insertBlock(ctrlSimpleForm);
+    					
     					isSubSectionUsed = true;
     
     				} else {
@@ -75,14 +84,14 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerInfoCont
     						title: grpName
     					});
     					oNewSubSection.insertBlock(ctrlSimpleForm);
-    					secCarreerInfo.addSubSection(oNewSubSection);
+    					secAdminSituation.addSubSection(oNewSubSection);
     
     				}
     
     			});
     			
 			}else{
-			    that.byId("dispStatusMsg").setText(hcm.people.profile.util.UIHelper.getResourceBundle().getText("CARREER_INFO_NO_DATA"));
+			    that.byId("dispStatusMsg").setText(hcm.people.profile.util.UIHelper.getResourceBundle().getText("ADMIN_SITUATION_NO_DATA"));
 			    that.byId("dispStatusMsg").setVisible(true);
 			}
 

@@ -1,0 +1,12 @@
+<mvc:View
+        xmlns:core="sap.ui.core"
+        xmlns:mvc="sap.ui.core.mvc"
+        xmlns:layout="sap.ui.layout"
+        xmlns:f="sap.ui.layout.form"
+        xmlns:m="sap.m"
+        xmlns:suite="sap.suite.ui.commons" 
+        controllerName="hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerDisciplinaryExpandedController">
+        
+        <layout:Grid id="ctrlCarreerDisciplinaryHolder" defaultSpan="L4 M6 S12" hSpacing="0">
+        </layout:Grid>
+</mvc:View>
