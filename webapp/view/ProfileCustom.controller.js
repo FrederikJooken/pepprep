@@ -1,4 +1,7 @@
-jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituation");
+jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationDesignation");
+jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationAffectation");
+jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationUtilization");
+jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationSuccessionPForm");
 jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerAdminData");
 jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerRemuneration");
 jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerGrade");
@@ -37,10 +40,77 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 
 		var _oUIHelper = hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper;
 
+		if (configObj.ZzshowAdminSituation === "X") {
+			//get Administrative Situation data
+			var queryPathAdminSituation = "AdministrativeSituationSet";
+			this.getView().getModel().read(queryPathAdminSituation, null, null, true, function(response) {
+
+				var _oAdminSituationColl = response.results;
+
+				//set CarreerInfo data in UIHelper
+				_oUIHelper.setAdminSituationData(_oAdminSituationColl);
+
+				//get sorted carreerinfo collection 
+				var groupedAdminSituationData = _oUIHelper.groupCollectionItems(_oAdminSituationColl);
+				_oUIHelper.setGroupedAdminSituationData(groupedAdminSituationData);
+
+			}, function(response) {
+				jQuery.sap.log.getLogger().error("Data fetch failed" + response.toString());
+			});
+
+			//create top level menu section CARREER
+			var oSectionAdminSituation = new sap.uxap.ObjectPageSection({
+				title: this.resourseBundle.getText("ADMIN_SITUATION")
+			});
+
+			//create ADMIN SITUATION sub sections
+
+			/*********************************************/
+			/* ADMIN SITUATION -> DESIGNATION subsection */
+			/*********************************************/
+			var oSubSectionAdminSituationDesignation = new sap.uxap.ObjectPageSubSection({
+				title: this.resourseBundle.getText("ADMINSITUATION_DESIGNATION")
+			});
+			oSubSectionAdminSituationDesignation.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationDesignation());
+			oSectionAdminSituation.addSubSection(oSubSectionAdminSituationDesignation);
+			
+			
+			/*********************************************/
+			/* ADMIN SITUATION -> AFFECTATION subsection */
+			/*********************************************/
+			var oSubSectionAdminSituationAffectation = new sap.uxap.ObjectPageSubSection({
+				title: this.resourseBundle.getText("ADMINSITUATION_AFFECTATION")
+			});
+			oSubSectionAdminSituationAffectation.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationAffectation());
+			oSectionAdminSituation.addSubSection(oSubSectionAdminSituationAffectation);
+			
+			/*********************************************/
+			/* ADMIN SITUATION -> AFFECTATION subsection */
+			/*********************************************/
+			var oSubSectionAdminSituationUtilization = new sap.uxap.ObjectPageSubSection({
+				title: this.resourseBundle.getText("ADMINSITUATION_UTILIZATION")
+			});
+			oSubSectionAdminSituationUtilization.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationUtilization());
+			oSectionAdminSituation.addSubSection(oSubSectionAdminSituationUtilization);
+			
+			/****************************************/
+			/* ADMIN SITUATION -> SUCCESSION P-FORM */
+			/****************************************/
+			var oSubSectionAdminSituationSuccessionPForm = new sap.uxap.ObjectPageSubSection({
+				title: this.resourseBundle.getText("ADMINSITUATION_SUCCESSION_PFORM")
+			});
+			_oUIHelper.setSubSecAdminSituationSuccessionPForm(oSubSectionAdminSituationSuccessionPForm);
+			oSubSectionAdminSituationSuccessionPForm.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationSuccessionPForm());
+			oSectionAdminSituation.addSubSection(oSubSectionAdminSituationSuccessionPForm);
+			
+			// Add Admin situation section to page layout
+			this.ctrlObjectPageLayout.addSection(oSectionAdminSituation);
+		}
+
 		if (configObj.ZzshowCareer === "X") {
 			//get CarreerInfo data
-			var queryPath = "CarreerInfoSet";
-			this.getView().getModel().read(queryPath, null, null, true, function(response) {
+			var queryPathCarreerInfo = "CarreerInfoSet";
+			this.getView().getModel().read(queryPathCarreerInfo, null, null, true, function(response) {
 
 				var carreerInfoColl = response.results;
 
@@ -62,27 +132,36 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 
 			//create CARREER sub sections
 
-			//CARREER -> ADMINISTRATIVE_DATA subsection
+			/*********************************************/
+			/* CARREER -> ADMINISTRATIVE_DATA subsection */
+			/*********************************************/
 			var oSubSectionCarreerAdminData = new sap.uxap.ObjectPageSubSection({
 				title: this.resourseBundle.getText("CARREER_ADMIN_DATA")
 			});
 			oSubSectionCarreerAdminData.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerAdminData());
 			oSectionCarreer.addSubSection(oSubSectionCarreerAdminData);
 
-			//CARREER -> REMUNERATION subsection
+			/**************************************/
+			/* CARREER -> REMUNERATION subsection */
+			/**************************************/
 			var oSubSectionCarreerRemuneration = new sap.uxap.ObjectPageSubSection({
 				title: this.resourseBundle.getText("CARREER_REMUNERATION")
 			});
 			oSubSectionCarreerRemuneration.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerRemuneration());
 			oSectionCarreer.addSubSection(oSubSectionCarreerRemuneration);
-			
-			//CARREER -> GRADE subsection
+
+			/*******************************/
+			/* CARREER -> GRADE subsection */
+			/*******************************/
 			var oSubSectionCarreerGrade = new sap.uxap.ObjectPageSubSection({
 				title: this.resourseBundle.getText("CARREER_GRADE")
 			});
 			oSubSectionCarreerGrade.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerGrade());
 			oSectionCarreer.addSubSection(oSubSectionCarreerGrade);
-			//CARREER -> DISCIPLINARY MEASURES subsection
+
+			/***********************************************/
+			/* CARREER -> DISCIPLINARY MEASURES subsection */
+			/***********************************************/
 			var oSubSectionCarreerDisciplinary = new sap.uxap.ObjectPageSubSection({
 				title: this.resourseBundle.getText("CARREER_DISCIPLINARY")
 			});
@@ -90,101 +169,9 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 			oSubSectionCarreerDisciplinary.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerDisciplinary());
 			oSectionCarreer.addSubSection(oSubSectionCarreerDisciplinary);
 
+			// Add carreer section to page layout
 			this.ctrlObjectPageLayout.addSection(oSectionCarreer);
 		}
-		/*	if (configObj.ZzshowAdminSituation === "X") {
-				var oSectionAdminSituation = new sap.uxap.ObjectPageSection({
-					title: that.resourseBundle.getText("ADMIN_SITUATION")
-				});
-				_oUIHelper.setSecAdminSituation(oSectionAdminSituation);
-
-				var oSubSectionAdminSituation = new sap.uxap.ObjectPageSubSection({
-					id: "subSecAdminSituation",
-					title: "TEST"
-						//showSubSectionMore: true
-				});
-				_oUIHelper.setSubSecAdminSituation(oSubSectionAdminSituation);
-
-				oSubSectionAdminSituation.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituation());
-				oSectionAdminSituation.addSubSection(oSubSectionAdminSituation);
-
-				that.ctrlObjectPageLayout.addSection(oSectionAdminSituation);
-
-			}*/
-
-		//Working on Carreer Info first //TODO remove comment
-		/*	if (configObj.ZzshowCareer === "X") {
-				//Prepare the Carreer Info section
-				var oSectionCarreerInfo = new sap.uxap.ObjectPageSection({
-					title: that.resourseBundle.getText("CARREER_INFO")
-				});
-				//	_oUIHelper.setSecCarreerInfo(oSectionCarreerInfo); //TODO check if needed ? 
-
-				//Get all CarreerInfo set data
-				var queryPath = "CarreerInfoSet";
-				this.getView().getModel().read(queryPath, null, null, true, function(response) {
-
-					var carreerInfoColl = response.results;
-
-					//set CarreerInfo data in UIHelper
-					_oUIHelper.setCarreerInfoData(carreerInfoColl);
-
-					//get sorted carreerinfo collection 
-					var groupedCarreerInfoData = _oUIHelper.groupCollectionItems(carreerInfoColl);
-					_oUIHelper.setGroupedCarreerInfoData(groupedCarreerInfoData);
-
-				}, function(response) {
-					jQuery.sap.log.getLogger().error("Data fetch failed" + response.toString());
-				});*/
-
-		/**************************************************/
-		/* Add all POSSIBLE CARREER INFO subsections here */
-		/**************************************************/
-
-		/**************************************/
-		/*  SUBSECTION - Administrative Data  */
-		/**************************************/
-		/*		var oSubSectionCarreerAdminData = new sap.uxap.ObjectPageSubSection({
-				title: "Administratieve data"
-			});
-			//	_oUIHelper.setSubSecCarreerAdminData(oSubSectionCarreerAdminData);  
-			oSubSectionCarreerAdminData.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerAdminData());
-			oSectionCarreerInfo.addSubSection(oSubSectionCarreerAdminData);
-*/
-		/*******************************/
-		/*  SUBSECTION - Remuneration  */
-		/*******************************/
-		/*		var oSubSectionCarreerRemuneration = new sap.uxap.ObjectPageSubSection({
-				//	TODO remove empty items - logica change
-			});
-			//				_oUIHelper.setSubSecCarreerRemuneration(oSubSectionCarreerRemuneration);  
-			oSubSectionCarreerRemuneration.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerRemuneration());
-			oSectionCarreerInfo.addSubSection(oSubSectionCarreerRemuneration);
-*/
-		/************************/
-		/*  SUBSECTION - Grade  */
-		/************************/
-		/*			var oSubSectionCarreerGrade = new sap.uxap.ObjectPageSubSection({
-						//	TODO remove empty items - logica change
-					});
-					_oUIHelper.setSubSecCarreerGrade(oSubSectionCarreerGrade);  
-					oSubSectionCarreerGrade.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerGrade());
-					oSectionCarreerInfo.addSubSection(oSubSectionCarreerGrade); 
-		*/
-		/******************************************************/
-		/*  SUBSECTION - Disciplinary Measures - collapsable  */
-		/******************************************************/
-		/*	var oSubSectionCarreerDisciplinary = new sap.uxap.ObjectPageSubSection({
-				//	TODO remove empty items - logica change
-			});
-			_oUIHelper.setSubSecCarreerDisciplinary(oSubSectionCarreerDisciplinary);  
-			oSubSectionCarreerDisciplinary.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerDisciplinary());
-			oSectionCarreerInfo.addSubSection(oSubSectionCarreerDisciplinary); 
-*/
-
-		// Add carreer info section to Object Page layout*/
-		//		that.ctrlObjectPageLayout.addSection(oSectionCarreerInfo);
-		//	}
 
 	},
 
@@ -217,13 +204,9 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 		this._oDialog.close();
 	},
 
-	_handleBeforeOpen: function() {
-		var a = this.getView().getModel();
-	},
+	_handleBeforeOpen: function() {},
 
-	_handleAfterClose: function() {
-		var a = this.getView().getModel();
-	},
+	_handleAfterClose: function() {},
 
 	onAfterRendering: function() {
 		// FJK - Hide EMPLOYEE_HIERARCHY button in top right - Obsolete because View was replaced afterwards and modification has been done there

@@ -8,6 +8,7 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 	
 	// Grouped oData collection results
 	var _oGroupedCarreerInfoData;
+	var _oGroupedAdminSituationData;
 
 	var _objSecCarreerInfo = null;
 
@@ -18,6 +19,7 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 	var _objSubSecCarreerRemuneration = null;
 	var _objSubSecCarreerGrade = null;
 	var _objSubSecCarreerDisciplinary = null;
+	var _objSubSecAdminSituationSuccessionPForm = null;
 
 	var _objSubSecAdminSituation = null;
 	var _objSecAdminSituation = null;
@@ -55,6 +57,16 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 		getSubSecCarreerDisciplinary: function() {
 			return _objSubSecCarreerDisciplinary;
 		},
+
+		
+		setSubSecAdminSituationSuccessionPForm: function(objSubSecAdminSituationSuccessionPForm) {
+			_objSubSecAdminSituationSuccessionPForm = objSubSecAdminSituationSuccessionPForm;
+		},
+
+		getSubSecAdminSituationSuccessionPForm: function() {
+			return _objSubSecAdminSituationSuccessionPForm;
+		},
+
 
 		setSubSecAdminSituation: function(objSubSecAdminSituation) {
 			_objSubSecAdminSituation = objSubSecAdminSituation;
@@ -110,6 +122,14 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 
 		getGroupedCarreerInfoData: function() {
 			return _oGroupedCarreerInfoData;
+		},
+		
+		setGroupedAdminSituationData: function(oGroupedAdminSituationData) {
+			_oGroupedAdminSituationData  = oGroupedAdminSituationData;
+		},
+
+		getGroupedAdminSituationData: function() {
+			return _oGroupedAdminSituationData;
 		},
 
 		groupCollectionItems: function(collectionToBeSorted) {
