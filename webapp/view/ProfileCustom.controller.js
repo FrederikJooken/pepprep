@@ -30,6 +30,21 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 			jQuery.sap.log.getLogger().error("Data fetch failed" + err.toString());
 		});
 
+		//Get the active applicatins
+		this.getView().getModel().read("/ActiveAppsListSet", null, null, false, function(oData, oResponse) {
+			//var activeAppsDataModel = new sap.ui.model.json.JSONModel(oData.results);
+			//that.getView().setModel(activeAppsDataModel, "activeAppsModel");
+			var activeAppsJSON = {
+				"activeApps": [{}]
+			};
+			activeAppsJSON.activeApps = activeAppsJSON.activeApps.concat(oData.results);
+			var activeAppsDataModel = new sap.ui.model.json.JSONModel(activeAppsJSON);
+			that.getView().setModel(activeAppsDataModel, "activeAppsModel");
+
+		}, function(err) {
+			jQuery.sap.log.getLogger().error("Data fetch failed" + err.toString());
+		});
+
 		Object.getPrototypeOf(this).initializeView.call(this);
 
 	},
@@ -73,8 +88,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 			});
 			oSubSectionAdminSituationDesignation.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationDesignation());
 			oSectionAdminSituation.addSubSection(oSubSectionAdminSituationDesignation);
-			
-			
+
 			/*********************************************/
 			/* ADMIN SITUATION -> AFFECTATION subsection */
 			/*********************************************/
@@ -83,7 +97,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 			});
 			oSubSectionAdminSituationAffectation.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationAffectation());
 			oSectionAdminSituation.addSubSection(oSubSectionAdminSituationAffectation);
-			
+
 			/*********************************************/
 			/* ADMIN SITUATION -> AFFECTATION subsection */
 			/*********************************************/
@@ -92,7 +106,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 			});
 			oSubSectionAdminSituationUtilization.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationUtilization());
 			oSectionAdminSituation.addSubSection(oSubSectionAdminSituationUtilization);
-			
+
 			/****************************************/
 			/* ADMIN SITUATION -> SUCCESSION P-FORM */
 			/****************************************/
@@ -102,7 +116,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 			_oUIHelper.setSubSecAdminSituationSuccessionPForm(oSubSectionAdminSituationSuccessionPForm);
 			oSubSectionAdminSituationSuccessionPForm.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationSuccessionPForm());
 			oSectionAdminSituation.addSubSection(oSubSectionAdminSituationSuccessionPForm);
-			
+
 			// Add Admin situation section to page layout
 			this.ctrlObjectPageLayout.addSection(oSectionAdminSituation);
 		}
@@ -204,9 +218,29 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 		this._oDialog.close();
 	},
 
+	onSubmitForm: function(oEvent) {
+		var supportAanvraagModel = this.getView().getModel("piwikDataModel");
+		var activeAppErr = sap.ui.getCore().byId("appNameSelect").getSelectedItem().getBindingContext("activeAppsModel").getProperty("Appname");
+		var errDescription = sap.ui.getCore().byId("descriptionTextArea").getValue();
+		supportAanvraagModel.getData().Appname = activeAppErr;
+		supportAanvraagModel.getData().Description = errDescription;
+
+		var oModel = this.getView().getModel();
+		oModel.create('/PiwikDatasetSet', supportAanvraagModel.getData(), null, function() {
+			sap.m.MessageToast.show(this.resourseBundle.getText("EMAIL_FORM_SUBMIT_OK"));
+		}, function(errMsg) { 
+			sap.m.MessageToast.show(this.resourseBundle.getText("EMAIL_FORM_SUBMIT_NOK"));
+		});
+
+	},
+
 	_handleBeforeOpen: function() {},
 
 	_handleAfterClose: function() {},
+
+	_handleBeforeClose: function(oEvent) {
+		var a = oEvent;
+	},
 
 	onAfterRendering: function() {
 		// FJK - Hide EMPLOYEE_HIERARCHY button in top right - Obsolete because View was replaced afterwards and modification has been done there

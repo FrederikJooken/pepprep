@@ -7,7 +7,7 @@
 	xmlns:mvc="sap.ui.core.mvc" xmlns:suite="sap.suite.ui.commons" xmlns:viz="sap.viz.ui5.controls" xmlns:bl="sap.uxap.blocks"
 	xmlns:pp="hcm.people.profile.blocks" controllerName="hcm.people.profile.view.Profile" xmlns:html="http://www.w3.org/1999/xhtml"
 	height="100%">
-	<uxap:ObjectPageLayout id="ctrlObjectPageLayout" subSectionLayout="TitleOnLeft" enableLazyLoading="true">
+	<uxap:ObjectPageLayout id="ctrlObjectPageLayout" subSectionLayout="TitleOnTop" enableLazyLoading="true">
 		<uxap:headerTitle>
 			<uxap:ObjectPageHeader id="ctlrObjHeaderEmp" headerDesign="Light" objectImageShape="Circle" isObjectIconAlwaysVisible="false"
 				isObjectTitleAlwaysVisible="false" isObjectSubtitleAlwaysVisible="false" showPlaceholder="true">

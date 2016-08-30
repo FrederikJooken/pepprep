@@ -7,7 +7,7 @@
         xmlns:suite="sap.suite.ui.commons" 
         controllerName="hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationAffectationController">
         
-        <layout:Grid id="ctrlAdminSituationAffectationHolder" width="100%" defaultSpan="L6 M6 S12">
+        <layout:Grid id="ctrlAdminSituationAffectationHolder" defaultSpan="L4 M6 S12" hSpacing="0">
 
         </layout:Grid> 
         

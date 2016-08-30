@@ -1,5 +1,8 @@
 jQuery.sap.registerModulePath("sap.hcm.lib.common", "/sap/bc/ui5_ui5/sap/hcm_common/sap/hcm/lib/common");
+jQuery.sap.registerModulePath("be.nmbs.Z_UI5_GENERIC", "/sap/bc/ui5_ui5/sap/zui5_gen");
 jQuery.sap.declare("hcm.people.profile.ZHCM_PEP_PROFILEExt.Component");
+/*global beNmbsUrlInterceptorObj:true*/
+
 // use the load function for getting the optimized preload file if present
 sap.ui.component.load({
 	name: "hcm.people.profile",
@@ -35,4 +38,17 @@ this.hcm.people.profile.Component.extend("hcm.people.profile.ZHCM_PEP_PROFILEExt
 			}
 		}
 	}
+	/*,
+
+	init: function() {
+		sap.ui.core.UIComponent.prototype.init.apply(this);
+
+		//CRxx (mail do 25/08/2016 11:31 & meeting 25/08 1pm)
+		var oComponentData = this.getComponentData(),
+			oStartUpParameters = oComponentData.startupParameters;
+		if (oStartUpParameters && oStartUpParameters.hasOwnProperty("UNAME_SUBST")) { //Username of replacer
+			jQuery.sap.require('be.nmbs.Z_UI5_GENERIC.utils.URLInterceptor');
+			beNmbsUrlInterceptorObj.setParams("UNAME_SUBST=" + oStartUpParameters.UNAME_SUBST[0]);
+		}
+	}*/
 });

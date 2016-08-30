@@ -1,11 +1,11 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
-<Dialog xmlns="sap.m" title="XML Fragment Dialog" beforeOpen="_handleBeforeOpen" afterClose="_handleAfterClose">
+<Dialog xmlns="sap.m" title="{i18n>EMAIL_FORM_TITLE}" beforeOpen="_handleBeforeOpen" afterClose="_handleAfterClose" contentWidth="60%" beforeClose="_handleBeforeClose">
 	<content>
 		<sap.ui.layout.form:SimpleForm xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" layout="ResponsiveGridLayout" id="emailForm">
 		<sap.ui.layout.form:content>
-			<core:Title text="{i18n>EMAIL_FORM_TITLE}" id="emailFormTitle"/>
+			<!--core:Title text="{i18n>EMAIL_FORM_TITLE}" id="emailFormTitle"/-->
 			<Label text="{i18n>EMAIL_FORM_LPB}" id="myLPBLabel" labelFor="myLPBText"/>
-			<Text id="myLPBText" text="{piwikDataModel>/Pernr}"/>
+			<Text id="myLPBText" text="{piwikDataModel>/Mylpb}"/>
 			<Label text="{i18n>EMAIL_FORM_NAME}" id="nameLabel" labelFor="nameText"/>
 			<Text id="nameText" text="{piwikDataModel>/LoggedUserName}"/>
 			<Label text="{i18n>EMAIL_FORM_VESTIGING}" id="vestigingLabel" labelFor="vestigingText"/>
@@ -19,17 +19,19 @@
 			<Label text="{i18n>EMAIL_FORM_REQUEST_TYPE}" id="requestTypeLabel" labelFor="requestTypeText"/>
 			<Text id="requestTypeText" text="{i18n>EMAIL_FORM_REQUEST_TYPE_TEXT}"/>
 			<Label text="{i18n>EMAIL_FORM_CATEGORY}" id="categoryLabel" labelFor="appNameSelect"/>
-			<Select forceSelection="true" items="{path: '/ActiveAppsListSet', sorter: {path: 'Appname'}}" id="appNameSelect">
+			<!--Select forceSelection="true" items="{path: '/ActiveAppsListSet', sorter: {path: 'Appname'}}" id="appNameSelect">
 				<core:Item key="{Appname}" text="{Appname}"/>
+			</Select-->
+			<Select items="{activeAppsModel>/activeApps}" id="appNameSelect" forceSelection="true">
+				<core:Item key="{activeAppsModel>Appname}" text="{activeAppsModel>Appname}"/>
 			</Select>
 			<Label id="descriptionLable" text="{i18n>EMAIL_FORM_DESCRIPTION}" labelFor="descriptionTextArea"/>
 			<TextArea id="descriptionTextArea" rows="3"/>
-			<!--Button text="{i18n>EMAIL_FORM_SUBMIT}" width="100px" id="submitButton" icon="sap-icon://email"/-->
 		</sap.ui.layout.form:content>
 	</sap.ui.layout.form:SimpleForm>
 	</content>
 	<buttons>
-		<Button id="okButton" text="Send email" type="Emphasized" icon="sap-icon://email" iconFirst="true"/>
+		<Button id="okButton" text="Send email" type="Emphasized" icon="sap-icon://email" iconFirst="true" press="onSubmitForm"/>
 		<Button id="cancelButton" text="Cancel" type="Default" icon="sap-icon://sys-cancel" iconFirst="true" press="onCancelPress"/>
 	</buttons>
 </Dialog>
