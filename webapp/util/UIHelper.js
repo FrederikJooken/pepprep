@@ -5,10 +5,12 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 	// oData collection results
 	var _oAdminSituationData = null;
 	var _oCarreerInfoData = null;
-	
+	var _oPersonalInfoData = null;
+
 	// Grouped oData collection results
 	var _oGroupedCarreerInfoData;
 	var _oGroupedAdminSituationData;
+	var _oGroupedPersonalInfoData;
 
 	var _objSecCarreerInfo = null;
 
@@ -58,7 +60,6 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 			return _objSubSecCarreerDisciplinary;
 		},
 
-		
 		setSubSecAdminSituationSuccessionPForm: function(objSubSecAdminSituationSuccessionPForm) {
 			_objSubSecAdminSituationSuccessionPForm = objSubSecAdminSituationSuccessionPForm;
 		},
@@ -66,7 +67,6 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 		getSubSecAdminSituationSuccessionPForm: function() {
 			return _objSubSecAdminSituationSuccessionPForm;
 		},
-
 
 		setSubSecAdminSituation: function(objSubSecAdminSituation) {
 			_objSubSecAdminSituation = objSubSecAdminSituation;
@@ -108,6 +108,14 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 			return _oAdminSituationData;
 		},
 
+		setPersonalInfoData: function(oPersonalInfoData) {
+			_oPersonalInfoData = oPersonalInfoData;
+		},
+
+		getPersonalInfoData: function() {
+			return _oPersonalInfoData;
+		},
+
 		setCarreerInfoData: function(oCarreerInfoData) {
 			_oCarreerInfoData = oCarreerInfoData;
 		},
@@ -123,13 +131,21 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 		getGroupedCarreerInfoData: function() {
 			return _oGroupedCarreerInfoData;
 		},
-		
+
 		setGroupedAdminSituationData: function(oGroupedAdminSituationData) {
-			_oGroupedAdminSituationData  = oGroupedAdminSituationData;
+			_oGroupedAdminSituationData = oGroupedAdminSituationData;
 		},
 
 		getGroupedAdminSituationData: function() {
 			return _oGroupedAdminSituationData;
+		},
+
+		setGroupedPersonalInfoData: function(oGroupedPersonalInfoData) {
+			_oGroupedPersonalInfoData = oGroupedPersonalInfoData;
+		},
+
+		getGroupedPersonalInfoData: function() {
+			return _oGroupedPersonalInfoData;
 		},
 
 		groupCollectionItems: function(collectionToBeSorted) {
@@ -142,7 +158,8 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 						groupedColl[collectionItem.Zzpos].vals.push({
 							"Fieldlabel": collectionItem.Fieldlabel,
 							"Fieldvalue": collectionItem.Fieldvalue,
-							"GroupName": collectionItem.Groupname
+							"GroupName": collectionItem.Groupname,
+							"Zzseqnr": collectionItem.Zzseqnr
 						});
 					} else {
 						groupedColl[collectionItem.Zzpos] = {
@@ -152,7 +169,8 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 						groupedColl[collectionItem.Zzpos].vals.push({
 							"Fieldlabel": collectionItem.Fieldlabel,
 							"Fieldvalue": collectionItem.Fieldvalue,
-							"GroupName": collectionItem.Groupname
+							"GroupName": collectionItem.Groupname,
+							"Zzseqnr": collectionItem.Zzseqnr
 						});
 					}
 				});
@@ -160,6 +178,36 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 			return groupedColl;
 		},
 
+		groupItemsPerSeqNr: function(collecionToBeGroupedPerSeqNr) {
+			var groupedCollPerSeqNr = [];
+			if (collecionToBeGroupedPerSeqNr.length > 0) {
+				collecionToBeGroupedPerSeqNr.forEach(function(collectItem) {
+			
+					if (groupedCollPerSeqNr[collectItem.Zzseqnr]) {
+						groupedCollPerSeqNr[collectItem.Zzseqnr].vals.push({
+							"Fieldlabel": collectItem.Fieldlabel,
+							"Fieldvalue": collectItem.Fieldvalue,
+							"GroupName": collectItem.Groupname,
+							"Zzpos": collectItem.Zzpos
+						});
+					} else {
+						groupedCollPerSeqNr[collectItem.Zzseqnr] = {
+							Zzseqnr: collectItem.Zzseqnr,
+							vals: []
+						};
+						groupedCollPerSeqNr[collectItem.Zzseqnr].vals.push({
+							"Fieldlabel": collectItem.Fieldlabel,
+							"Fieldvalue": collectItem.Fieldvalue,
+							"GroupName": collectItem.Groupname,
+							"Zzpos": collectItem.Zzpos
+						});
+					}
+				});
+			}
+			return groupedCollPerSeqNr;
+		},
+
+		//might become obsolete, they want to send the mails using SAP SOST inbox
 		sendEmail: function(subject, body, cc) {
 
 			var wsRes = "";

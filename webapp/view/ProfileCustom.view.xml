@@ -45,7 +45,8 @@
 				<m:Label id="lblPosition"/>
 				<m:Label id="lblOrgUnit" visible="false"/> <!-- FJK - hide field -->
 				<m:Text id="lblIDF"/>
-				<m:Text id="lblEmpNo"/>
+				<m:Text id="lblEmpNo" visible="false"/> <!-- FJK - use own notation -->
+				<m:Text id="lblNmbsEmpNo"/>
 			</layout:VerticalLayout>
 			<layout:VerticalLayout>
 				<!--<layout:layoutData>-->

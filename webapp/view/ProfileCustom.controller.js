@@ -6,6 +6,10 @@ jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerAdminDa
 jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerRemuneration");
 jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerGrade");
 jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerDisciplinary");
+jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoPersonData");
+jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoPersContact");
+jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoProfContact");
+jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoEmergencyData");
 jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper");
 sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 
@@ -13,16 +17,17 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 
 		var that = this;
 
-		//Get the logged on user ID and name, to add it to the PiwikDataSet later on...
-		var _oUserInfoService = sap.ushell.Container.getService("UserInfo");
+		//Get the logged on user ID and name, to add it to the PiwikDataSet later on... --> obsolete because sent now via piwik data set collection
+		/*var _oUserInfoService = sap.ushell.Container.getService("UserInfo");
 		var sUserId = _oUserInfoService.getUser().getId(); //only works when deployed on ABAP stacked Front-end server		
 		var sUserName = _oUserInfoService.getUser().getFullName();
+		*/
 
 		//Get the piwik data from the OData service
 		this.getView().getModel().read("/PiwikDatasetSet", null, null, false, function(oData, oResponse) {
 			//add the logged on user ID ot the OData data
-			oData.results[0].LoggedUserId = sUserId;
-			oData.results[0].LoggedUserName = sUserName;
+	//		oData.results[0].LoggedUserId = sUserId;
+	//		oData.results[0].LoggedUserName = sUserName;
 			var piwikDataModel = new sap.ui.model.json.JSONModel(oData.results[0]);
 			that.getView().setModel(piwikDataModel, "piwikDataModel");
 
@@ -52,8 +57,82 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 	buildByConfiguration: function(configObj) {
 
 		Object.getPrototypeOf(this).buildByConfiguration.call(this, configObj);
-
+		var pernr = hcm.people.profile.util.UIHelper.getPernr();
 		var _oUIHelper = hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper;
+
+		if (configObj.ZzshowPersonalinfo === "X"){
+			//var queryPathPersonalInfo = "PersonalInfoSet";
+			var queryPathPersonalInfo =	"EmployeeDataSet('" + pernr + "')/PersonalInfoSet";
+			
+			this.getView().getModel().read(queryPathPersonalInfo, null, null, false, function(response) {
+
+				var _oPersonalInfoColl = response.results;
+
+				//set CarreerInfo data in UIHelper
+				_oUIHelper.setPersonalInfoData(_oPersonalInfoColl);
+
+				//get sorted carreerinfo collection 
+				var groupedPersonalInfoData = _oUIHelper.groupCollectionItems(_oPersonalInfoColl);
+				_oUIHelper.setGroupedPersonalInfoData(groupedPersonalInfoData);
+
+			}, function(response) {
+				jQuery.sap.log.getLogger().error("Data fetch failed" + response.toString());
+			});
+			
+			//create top level menu section PERSONAL INFO
+			var oSectionPersonalInfo = new sap.uxap.ObjectPageSection({
+				title: this.resourseBundle.getText("PERSONAL_INFO")
+			});
+
+			//create PERSONAL INFO sub sections
+		
+			/*******************************************/
+			/* PERSONAL INFO -> PERSON DATA subsection */
+			/*******************************************/
+			var oSubSectionPersonalInfoPersonData = new sap.uxap.ObjectPageSubSection({
+				title: this.resourseBundle.getText("PERSONAL_INFO_PERSON_DATA")
+			});
+			oSubSectionPersonalInfoPersonData.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoPersonData());
+			oSectionPersonalInfo.addSubSection(oSubSectionPersonalInfoPersonData);
+			
+			
+			/*****************************************************/
+			/* PERSONAL INFO -> PERSONAL CONTACT DATA subsection */
+			/*****************************************************/
+			var oSubSectionPersonalInfoPersContact = new sap.uxap.ObjectPageSubSection({
+				title: this.resourseBundle.getText("PERSONAL_INFO_PERS_CONTACT")
+			});
+			oSubSectionPersonalInfoPersContact.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoPersContact());
+			oSectionPersonalInfo.addSubSection(oSubSectionPersonalInfoPersContact);
+			
+			
+			/*********************************************************/
+			/* PERSONAL INFO -> PROFESSIONAL CONTACT DATA subsection */
+			/*********************************************************/
+			var oSubSectionPersonalInfoProfContact = new sap.uxap.ObjectPageSubSection({
+				title: this.resourseBundle.getText("PERSONAL_INFO_PROF_CONTACT")
+			});
+			oSubSectionPersonalInfoProfContact.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoProfContact());
+			oSectionPersonalInfo.addSubSection(oSubSectionPersonalInfoProfContact);
+			
+			
+			/**********************************************/
+			/* PERSONAL INFO -> EMERGENCY DATA subsection */
+			/**********************************************/
+			var oSubSectionPersonalInfoEmergencyData = new sap.uxap.ObjectPageSubSection({
+				title: this.resourseBundle.getText("PERSONAL_INFO_EMERGENCY_DATA")
+			});
+			oSubSectionPersonalInfoEmergencyData.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoEmergencyData());
+			oSectionPersonalInfo.addSubSection(oSubSectionPersonalInfoEmergencyData);
+			
+			
+			
+			// Add Personal Information section to page layout
+			this.ctrlObjectPageLayout.addSection(oSectionPersonalInfo);
+			
+		}
+
+
 
 		if (configObj.ZzshowAdminSituation === "X") {
 			//get Administrative Situation data
@@ -99,7 +178,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 			oSectionAdminSituation.addSubSection(oSubSectionAdminSituationAffectation);
 
 			/*********************************************/
-			/* ADMIN SITUATION -> AFFECTATION subsection */
+			/* ADMIN SITUATION -> UTILIZATION subsection */
 			/*********************************************/
 			var oSubSectionAdminSituationUtilization = new sap.uxap.ObjectPageSubSection({
 				title: this.resourseBundle.getText("ADMINSITUATION_UTILIZATION")
@@ -134,6 +213,28 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 				//get sorted carreerinfo collection 
 				var groupedCarreerInfoData = _oUIHelper.groupCollectionItems(carreerInfoColl);
 				_oUIHelper.setGroupedCarreerInfoData(groupedCarreerInfoData);
+				
+				
+				//MASSIVE TEST 
+				
+			/*	var _oCarreerInfoDisciplinaryGroupedBySeqNr = _oUIHelper.groupItemsPerSeqNr((groupedCarreerInfoData.CARR_DISCIPLINARY).vals);
+				
+				//loop over the fields and values
+				var counter = 1; 
+				for (var key in _oCarreerInfoDisciplinaryGroupedBySeqNr){
+					console.log("now handling object nr "+counter);
+					var obj1 = _oCarreerInfoDisciplinaryGroupedBySeqNr[key].vals;
+					obj1.forEach(function(objItem){
+						console.log(objItem.Fieldlabel + " : "+objItem.Fieldvalue);
+					});
+					counter++;
+				}
+				*/
+			
+					
+				
+				//MASSIVE TEST 
+				
 
 			}, function(response) {
 				jQuery.sap.log.getLogger().error("Data fetch failed" + response.toString());
@@ -194,10 +295,17 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 		Object.getPrototypeOf(this).buildHeaderUI.call(this, objEmployeeData);
 
 		if (objEmployeeData.Zzidf) {
-			this.byId("lblIDF").setText(objEmployeeData.Zzidf);
+			this.byId("lblIDF").setText("IDF: "+objEmployeeData.Zzidf);
 		} else {
 			this.byId("lblIDF").setVisible(false);
 		}
+		if (objEmployeeData.Employeenumber){
+			this.byId("lblNmbsEmpNo").setText("Pernr: "+objEmployeeData.Employeenumber);
+		}
+		else {
+			this.byId("lblNmbsEmpNo").setVisible(false);
+		}
+		
 	},
 
 	onIncorrectDataLinkPress: function(oEvent) {
@@ -219,6 +327,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 	},
 
 	onSubmitForm: function(oEvent) {
+		var _self = this;
 		var supportAanvraagModel = this.getView().getModel("piwikDataModel");
 		var activeAppErr = sap.ui.getCore().byId("appNameSelect").getSelectedItem().getBindingContext("activeAppsModel").getProperty("Appname");
 		var errDescription = sap.ui.getCore().byId("descriptionTextArea").getValue();
@@ -227,9 +336,11 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 
 		var oModel = this.getView().getModel();
 		oModel.create('/PiwikDatasetSet', supportAanvraagModel.getData(), null, function() {
-			sap.m.MessageToast.show(this.resourseBundle.getText("EMAIL_FORM_SUBMIT_OK"));
+			_self._oDialog.close();
+			sap.m.MessageToast.show(_self.resourseBundle.getText("EMAIL_FORM_SUBMIT_OK"));
 		}, function(errMsg) { 
-			sap.m.MessageToast.show(this.resourseBundle.getText("EMAIL_FORM_SUBMIT_NOK"));
+			_self._oDialog.close();
+			sap.m.MessageToast.show(_self.resourseBundle.getText("EMAIL_FORM_SUBMIT_NOK"));
 		});
 
 	},

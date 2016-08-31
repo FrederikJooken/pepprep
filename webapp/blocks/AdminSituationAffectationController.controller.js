@@ -16,7 +16,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationA
 
 		if (_oGroupedAdminSituationData && _oGroupedAdminSituationData.ADMIN_AFFECTATION) {
 
-			// for each item in the carreer remuneration array
+			// for each item in the affectation  array
 			_oGroupedAdminSituationData.ADMIN_AFFECTATION.vals.forEach(function(adminSituationAffectationItem) {
 				//optie 1
 

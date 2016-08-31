@@ -7,7 +7,7 @@
         xmlns:suite="sap.suite.ui.commons" 
         controllerName="hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationSuccessionPFormCollapsedController">
         
-        <layout:Grid  id="ctrlAdminSituationSuccessionPFormHolder" defaultSpan="L4 M6 S12" hSpacing="0"> 
+        <layout:Grid  id="ctrlAdminSituationSuccessionPFormHolder" defaultSpan="L3 M6 S12" hSpacing="0"> 
         </layout:Grid>
         <m:Label id="dispStatusMsg" visible="false" design="Bold" width="100%"></m:Label>
 </mvc:View>

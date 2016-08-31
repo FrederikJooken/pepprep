@@ -16,28 +16,23 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerGradeCon
 
 		if (_oGroupedCarreerInfoData && _oGroupedCarreerInfoData.CARR_GRADE) {
 
-			var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
-				maxContainerCols: 2,
-				editable: false,
-				layout: "ResponsiveGridLayout"
-			});
-
 			// for each item in the carreer Grade array
 			_oGroupedCarreerInfoData.CARR_GRADE.vals.forEach(function(carreerGradeItem) {
+				var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
+					maxContainerCols: 2,
+					editable: false,
+					layout: "ResponsiveGridLayout"
+				});
 				ctrlSimpleForm.addContent(new sap.m.Label({
 					text: carreerGradeItem.Fieldlabel
 				}));
 				ctrlSimpleForm.addContent(new sap.m.Text({
 					text: carreerGradeItem.Fieldvalue
 				}));
-
+				_oCtrlCarreerGradeContainer.addContent(ctrlSimpleForm);
 			});
 
-			_oCtrlCarreerGradeContainer.addContent(ctrlSimpleForm);
-
-		}
-		
-		else {
+		} else {
 			this.byId("dispStatusMsg").setText(hcm.people.profile.util.UIHelper.getResourceBundle().getText("CARREER_GRADE_NO_DATA"));
 			this.byId("dispStatusMsg").setVisible(true);
 		}

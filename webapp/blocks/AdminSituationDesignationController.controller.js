@@ -16,24 +16,21 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationD
 
 		if (_oGroupedAdminSituationData && _oGroupedAdminSituationData.ADMIN_DESIGNATION) {
 
-			var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
-				maxContainerCols: 2,
-				editable: false,
-				layout: "ResponsiveGridLayout"
-			});
-
 			// for each item in the carreer remuneration array
 			_oGroupedAdminSituationData.ADMIN_DESIGNATION.vals.forEach(function(adminSituationDesignationItem) {
+				var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
+					maxContainerCols: 2,
+					editable: false,
+					layout: "ResponsiveGridLayout"
+				});
 				ctrlSimpleForm.addContent(new sap.m.Label({
 					text: adminSituationDesignationItem.Fieldlabel
 				}));
 				ctrlSimpleForm.addContent(new sap.m.Text({
 					text: adminSituationDesignationItem.Fieldvalue
 				}));
-
+				_oCtrlAdminSituationDesignationContainer.addContent(ctrlSimpleForm);
 			});
-
-			_oCtrlAdminSituationDesignationContainer.addContent(ctrlSimpleForm);
 
 		} else {
 			this.byId("dispStatusMsg").setText(hcm.people.profile.util.UIHelper.getResourceBundle().getText("ADMINSITUATION_DESIGNATION_NO_DATA"));
