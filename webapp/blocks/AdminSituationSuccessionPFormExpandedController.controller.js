@@ -7,27 +7,54 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationS
 		this.buildUI();
 	},
 
-	buildUI: function() {
+/*	buildUI: function() { // hier verder doen
 		var _oCtrlAdminSituationSuccessionPFormContainer = this.byId("ctrlAdminSituationSuccessionPFormHolder");
 		var _oUIHelper = hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper;
 		var _oGroupedAdminSituationData = _oUIHelper.getGroupedAdminSituationData();
 
-		_oGroupedAdminSituationData.ADMIN_PFORM.vals.forEach(function(adminSituationSuccessionPFormItem) {
+		var _oAdminSituationSuccessionPFormGroupedBySeqNr = _oUIHelper.groupItemsPerSeqNr((_oGroupedAdminSituationData.ADMIN_PFORM).vals);
+		
+		
+		for (var key in _oAdminSituationSuccessionPFormGroupedBySeqNr) {
+
+			var successionPFormObj = _oAdminSituationSuccessionPFormGroupedBySeqNr[key].vals;
+			successionPFormObj.forEach(function(adminSituationSuccessionPFormItem) {
+
 				var ctrlVertLayout = new sap.ui.layout.VerticalLayout();
 				ctrlVertLayout.addContent(new sap.m.Label({
-					text: adminSituationSuccessionPFormItem.Fieldlabel,
-					design: "Bold"
+					text: adminSituationSuccessionPFormItem.Fieldlabel
 				}));
 				ctrlVertLayout.addContent(new sap.m.Text({
 					text: adminSituationSuccessionPFormItem.Fieldvalue,
 					wrapping: true
 				}));
-
-		//		_oCtrlAdminSituationSuccessionPFormContainer.removeContent();
 				_oCtrlAdminSituationSuccessionPFormContainer.addContent(ctrlVertLayout);
-		});
+			});
 
-	},
+		}
+
+	},*/
+
+		buildUI: function() {
+			var _oCtrlAdminSituationSuccessionPFormContainer = this.byId("ctrlAdminSituationSuccessionPFormHolder");
+			var _oUIHelper = hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper;
+			var _oGroupedAdminSituationData = _oUIHelper.getGroupedAdminSituationData();
+
+			_oGroupedAdminSituationData.ADMIN_PFORM.vals.forEach(function(adminSituationSuccessionPFormItem) {
+					var ctrlVertLayout = new sap.ui.layout.VerticalLayout();
+					ctrlVertLayout.addContent(new sap.m.Label({
+						text: adminSituationSuccessionPFormItem.Fieldlabel
+					}));
+					ctrlVertLayout.addContent(new sap.m.Text({
+						text: adminSituationSuccessionPFormItem.Fieldvalue,
+						wrapping: true
+					}));
+
+			//		_oCtrlAdminSituationSuccessionPFormContainer.removeContent();
+					_oCtrlAdminSituationSuccessionPFormContainer.addContent(ctrlVertLayout);
+			});
+
+		},
 
 	onBeforeRendering: function() {
 

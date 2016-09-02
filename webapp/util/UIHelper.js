@@ -22,6 +22,7 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 	var _objSubSecCarreerGrade = null;
 	var _objSubSecCarreerDisciplinary = null;
 	var _objSubSecAdminSituationSuccessionPForm = null;
+	var _objSubSecPersonalInfoMedicalRestriction = null;
 
 	var _objSubSecAdminSituation = null;
 	var _objSecAdminSituation = null;
@@ -66,6 +67,14 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 
 		getSubSecAdminSituationSuccessionPForm: function() {
 			return _objSubSecAdminSituationSuccessionPForm;
+		},
+
+		setSubSecPersonalInfoMedicalRestriction: function(objSubSecPersonalInfoMedicalRestriction) {
+			_objSubSecPersonalInfoMedicalRestriction = objSubSecPersonalInfoMedicalRestriction;
+		},
+
+		getSubSecPersonalInfoMedicalRestriction: function() {
+			return _objSubSecPersonalInfoMedicalRestriction;
 		},
 
 		setSubSecAdminSituation: function(objSubSecAdminSituation) {

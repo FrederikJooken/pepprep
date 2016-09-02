@@ -17,13 +17,13 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerAdminDat
 
 		if (_oGroupedCarreerInfoData && _oGroupedCarreerInfoData.CARR_ADMIN_DATA) {
 
-			// for each item in the carreer admin data array
-			_oGroupedCarreerInfoData.CARR_ADMIN_DATA.vals.forEach(function(carreerAdminDataItem) {
-				var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
-					maxContainerCols: 4,
-					editable: false,
+			var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
+					columnsL: 2, 
 					layout: "ResponsiveGridLayout"
 				});
+			// for each item in the carreer admin data array
+			_oGroupedCarreerInfoData.CARR_ADMIN_DATA.vals.forEach(function(carreerAdminDataItem) {
+		
 				ctrlSimpleForm.addContent(new sap.m.Label({
 					text: carreerAdminDataItem.Fieldlabel
 				}));

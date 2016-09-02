@@ -10,8 +10,11 @@ jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoPe
 jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoPersContact");
 jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoProfContact");
 jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoEmergencyData");
+jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoMedicalRestrictions");
 jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper");
 sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
+
+//TODO GENERAL TODO -> checken of overal -> if (_oGroupedCarreerInfoData && _oGroupedCarreerInfoData.CARR_REMUNERATION) (and varianten) beter kunnen vervangen worden door hasownproperty (en mss bepaalde views consolideren)
 
 	initializeView: function() {
 
@@ -125,6 +128,15 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 			oSubSectionPersonalInfoEmergencyData.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoEmergencyData());
 			oSectionPersonalInfo.addSubSection(oSubSectionPersonalInfoEmergencyData);
 			
+			/****************************************************/
+			/* PERSONAL INFO -> MEDICAL RESTRICTIONS subsection */
+			/****************************************************/
+			var oSubSectionPersonalInfoMedicalRestrictions = new sap.uxap.ObjectPageSubSection({
+				title: this.resourseBundle.getText("ADMINSITUATION_MEDICAL_RESTRICT")
+			});
+			_oUIHelper.setSubSecPersonalInfoMedicalRestriction(oSubSectionPersonalInfoMedicalRestrictions);
+			oSubSectionPersonalInfoMedicalRestrictions.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoMedicalRestrictions());
+			oSectionPersonalInfo.addSubSection(oSubSectionPersonalInfoMedicalRestrictions);
 			
 			
 			// Add Personal Information section to page layout

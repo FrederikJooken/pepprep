@@ -1,21 +1,21 @@
 jQuery.sap.require("hcm.people.profile.util.UIHelper");
 jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper");
 
-sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerDisciplinaryExpandedController", {
+sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoMedicalRestrictionsExpandedController", {
 
 	onInit: function() {
 		this.buildUI();
 	},
 
 	buildUI: function() {
-		var _oCtrlCarreerDisciplinaryContainer = this.byId("ctrlCarreerDisciplinaryHolder");
+		var _oCtrlPersonalInfoMedicalRestrictionsContainer = this.byId("ctrlPersonalInfoMedicalRestrictionsHolder");
 		var _oUIHelper = hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper;
-		var _oGroupedCarreerInfoData = _oUIHelper.getGroupedCarreerInfoData();
+		var _oGroupedPersonalInfoData = _oUIHelper.getGroupedPersonalInfoData();
 
-		var _oCarreerInfoDisciplinaryGroupedBySeqNr = _oUIHelper.groupItemsPerSeqNr((_oGroupedCarreerInfoData.CARR_DISCIPLINARY).vals);
+		var _oPersonalInfoMedicalRestrictionsGroupedBySeqNr = _oUIHelper.groupItemsPerSeqNr((_oGroupedPersonalInfoData.MEDIC_RESTRICTIONS).vals);
 	
 		//loop over the fields and values
-		for (var key in _oCarreerInfoDisciplinaryGroupedBySeqNr) {
+		for (var key in _oPersonalInfoMedicalRestrictionsGroupedBySeqNr) {
 			var ctrlHoriLayout = new sap.ui.layout.HorizontalLayout();
 			var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
 		//		maxContainerCols: 4,
@@ -23,11 +23,11 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerDiscipli
 				/*,
 				layout: "ResponsiveGridLayout"*/
 			});
-			var obj1 = _oCarreerInfoDisciplinaryGroupedBySeqNr[key].vals;
-			obj1.forEach(function(carreerDisciplinaryItem) {
+			var obj1 = _oPersonalInfoMedicalRestrictionsGroupedBySeqNr[key].vals;
+			obj1.forEach(function(personalInfoMedicRestrictionItem) {
 
 				ctrlSimpleForm.addContent(new sap.m.Text({
-					text: carreerDisciplinaryItem.Fieldlabel + ": "+carreerDisciplinaryItem.Fieldvalue
+					text: personalInfoMedicRestrictionItem.Fieldlabel + ": "+personalInfoMedicRestrictionItem.Fieldvalue
 				}));
 				/*ctrlSimpleForm.addContent(new sap.m.Text({
 					text: carreerDisciplinaryItem.Fieldvalue
@@ -36,7 +36,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerDiscipli
 	//			console.log(carreerDisciplinaryItem.Fieldlabel + " : " + carreerDisciplinaryItem.Fieldvalue);
 			});
 			ctrlHoriLayout.addContent(ctrlSimpleForm);
-			_oCtrlCarreerDisciplinaryContainer.addContent(ctrlHoriLayout);
+			_oCtrlPersonalInfoMedicalRestrictionsContainer.addContent(ctrlHoriLayout);
 		}
 	},
 
