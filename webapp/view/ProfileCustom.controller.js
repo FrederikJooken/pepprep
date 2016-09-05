@@ -125,6 +125,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 			var oSubSectionPersonalInfoEmergencyData = new sap.uxap.ObjectPageSubSection({
 				title: this.resourseBundle.getText("PERSONAL_INFO_EMERGENCY_DATA")
 			});
+			_oUIHelper.setSubSecPersonalInfoEmergency(oSubSectionPersonalInfoEmergencyData);
 			oSubSectionPersonalInfoEmergencyData.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoEmergencyData());
 			oSectionPersonalInfo.addSubSection(oSubSectionPersonalInfoEmergencyData);
 			
@@ -132,7 +133,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 			/* PERSONAL INFO -> MEDICAL RESTRICTIONS subsection */
 			/****************************************************/
 			var oSubSectionPersonalInfoMedicalRestrictions = new sap.uxap.ObjectPageSubSection({
-				title: this.resourseBundle.getText("ADMINSITUATION_MEDICAL_RESTRICT")
+				title: this.resourseBundle.getText("PERSONAL_INFO_MEDICAL_RESTRICT")
 			});
 			_oUIHelper.setSubSecPersonalInfoMedicalRestriction(oSubSectionPersonalInfoMedicalRestrictions);
 			oSubSectionPersonalInfoMedicalRestrictions.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoMedicalRestrictions());

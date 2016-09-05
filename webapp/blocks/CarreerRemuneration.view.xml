@@ -7,7 +7,7 @@
         xmlns:suite="sap.suite.ui.commons" 
         controllerName="hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerRemunerationController">
         
-        <layout:Grid id="ctrlCarreerRemunerationHolder" defaultSpan="L3 M6 S12" hSpacing="0">
+        <layout:Grid id="ctrlCarreerRemunerationHolder" defaultSpan="L12 M12 S12" hSpacing="0">
 
         </layout:Grid> 
         

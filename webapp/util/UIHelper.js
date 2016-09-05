@@ -23,6 +23,10 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 	var _objSubSecCarreerDisciplinary = null;
 	var _objSubSecAdminSituationSuccessionPForm = null;
 	var _objSubSecPersonalInfoMedicalRestriction = null;
+	var _objSubSecPersonalInfoEmergency = null;
+
+	//TODO delte _objSubSecAdminSituationSuccessionPForm + getters and setters
+	var _objSubSecTest = null;
 
 	var _objSubSecAdminSituation = null;
 	var _objSecAdminSituation = null;
@@ -69,6 +73,17 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 			return _objSubSecAdminSituationSuccessionPForm;
 		},
 
+		//TODO remove 
+		setSubSecTest: function(objSubSecTest) {
+			_objSubSecTest = objSubSecTest;
+		},
+
+		//TODO remove 
+		getSubSecTest: function() {
+			return _objSubSecTest;
+		},
+
+
 		setSubSecPersonalInfoMedicalRestriction: function(objSubSecPersonalInfoMedicalRestriction) {
 			_objSubSecPersonalInfoMedicalRestriction = objSubSecPersonalInfoMedicalRestriction;
 		},
@@ -76,6 +91,16 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 		getSubSecPersonalInfoMedicalRestriction: function() {
 			return _objSubSecPersonalInfoMedicalRestriction;
 		},
+
+
+		setSubSecPersonalInfoEmergency: function(objSubSecPersonalInfoEmergency) {
+			_objSubSecPersonalInfoEmergency = objSubSecPersonalInfoEmergency;
+		},
+
+		getSubSecPersonalInfoEmergency: function() {
+			return _objSubSecPersonalInfoEmergency;
+		},
+
 
 		setSubSecAdminSituation: function(objSubSecAdminSituation) {
 			_objSubSecAdminSituation = objSubSecAdminSituation;

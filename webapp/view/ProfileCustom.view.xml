@@ -12,7 +12,7 @@
 			<uxap:ObjectPageHeader id="ctlrObjHeaderEmp" headerDesign="Light" objectImageShape="Circle" isObjectIconAlwaysVisible="false"
 				isObjectTitleAlwaysVisible="false" isObjectSubtitleAlwaysVisible="false" showPlaceholder="true">
 				<uxap:navigationBar>
-					<m:Bar>
+					<m:Bar visible="false">
 						<m:contentLeft>
 							<m:Button icon="sap-icon://nav-back" press="onBackPress" visible="false"></m:Button>
 						</m:contentLeft>

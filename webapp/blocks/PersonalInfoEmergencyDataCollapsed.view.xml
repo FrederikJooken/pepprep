@@ -5,10 +5,11 @@
         xmlns:f="sap.ui.layout.form"
         xmlns:m="sap.m"
         xmlns:suite="sap.suite.ui.commons" 
-        controllerName="hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationCollapsedController">
-	
-        <layout:Grid  id="ctrlAdminSituationContainer" defaultSpan="L12 M12 S12" hSpacing="0"> 
-        </layout:Grid>
+        controllerName="hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoEmergencyDataCollapsedController">
+        
+        <layout:Grid id="ctrlPersonalInfoEmergencyDataHolder" defaultSpan="L12 M12 S12" hSpacing="0">
+
+        </layout:Grid> 
         
         <m:Label id="dispStatusMsg" visible="false" design="Bold" width="100%"></m:Label>
  

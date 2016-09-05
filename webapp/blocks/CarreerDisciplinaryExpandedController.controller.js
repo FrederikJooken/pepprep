@@ -13,30 +13,37 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerDiscipli
 		var _oGroupedCarreerInfoData = _oUIHelper.getGroupedCarreerInfoData();
 
 		var _oCarreerInfoDisciplinaryGroupedBySeqNr = _oUIHelper.groupItemsPerSeqNr((_oGroupedCarreerInfoData.CARR_DISCIPLINARY).vals);
-	
+
 		//loop over the fields and values
 		for (var key in _oCarreerInfoDisciplinaryGroupedBySeqNr) {
-			var ctrlHoriLayout = new sap.ui.layout.HorizontalLayout();
-			var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
-		//		maxContainerCols: 4,
-				editable: false
-				/*,
-				layout: "ResponsiveGridLayout"*/
+			var ctrlHorizontalLayout = new sap.ui.layout.HorizontalLayout({
+				layoutData: new sap.ui.layout.GridData({
+					span: "L12 M12 S12"
+				}),
+				allowWrapping: true
 			});
-			var obj1 = _oCarreerInfoDisciplinaryGroupedBySeqNr[key].vals;
-			obj1.forEach(function(carreerDisciplinaryItem) {
+			var carreerDisciplinaryObj = _oCarreerInfoDisciplinaryGroupedBySeqNr[key].vals;
+			carreerDisciplinaryObj.forEach(function(carreerDisciplinaryItem) {
+				var ctrlVerticalLayout = new sap.ui.layout.VerticalLayout({
+					layoutData: new sap.ui.layout.GridData({}),
+					width: "250px"
+				});
 
-				ctrlSimpleForm.addContent(new sap.m.Text({
-					text: carreerDisciplinaryItem.Fieldlabel + ": "+carreerDisciplinaryItem.Fieldvalue
+				var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
+					layout: "ResponsiveGridLayout"
+				});
+				ctrlSimpleForm.addContent(new sap.m.Label({
+					text: carreerDisciplinaryItem.Fieldlabel
 				}));
-				/*ctrlSimpleForm.addContent(new sap.m.Text({
-					text: carreerDisciplinaryItem.Fieldvalue
-				}));*/
+				ctrlSimpleForm.addContent(new sap.m.Text({
+					text: carreerDisciplinaryItem.Fieldvalue,
+					wrapping: true
+				}));
+				ctrlVerticalLayout.addContent(ctrlSimpleForm);
+				ctrlHorizontalLayout.addContent(ctrlVerticalLayout);
 
-	//			console.log(carreerDisciplinaryItem.Fieldlabel + " : " + carreerDisciplinaryItem.Fieldvalue);
 			});
-			ctrlHoriLayout.addContent(ctrlSimpleForm);
-			_oCtrlCarreerDisciplinaryContainer.addContent(ctrlHoriLayout);
+			_oCtrlCarreerDisciplinaryContainer.addContent(ctrlHorizontalLayout);
 		}
 	},
 

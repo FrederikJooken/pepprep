@@ -16,25 +16,35 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoPro
 
 		if (_oGroupedPersonalInfoData && _oGroupedPersonalInfoData.PROF_CONTACT) {
 
+			var ctrlHorizontalLayout = new sap.ui.layout.HorizontalLayout({
+				layoutData: new sap.ui.layout.GridData({
+					span: "L12 M12 S12"
+				}),
+				allowWrapping: true
+			});
+
 			// for each item in the personal info person data array
 			_oGroupedPersonalInfoData.PROF_CONTACT.vals.forEach(function(personalInfoProfContactItem) {
 
-					var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
-						maxContainerCols: 2,
-						editable: false,
-						layout: "ResponsiveGridLayout"
-					});
-					ctrlSimpleForm.addContent(new sap.m.Label({
-						text: personalInfoProfContactItem.Fieldlabel
-					}));
-					ctrlSimpleForm.addContent(new sap.m.Text({
-						text: personalInfoProfContactItem.Fieldvalue
-					}));
-					_oCtrlPersonalInfoProfContactContainer.addContent(ctrlSimpleForm);
+				var ctrlVerticalLayout = new sap.ui.layout.VerticalLayout({
+					layoutData: new sap.ui.layout.GridData({}),
+					width: "250px"
+				});
 
+				var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
+					layout: "ResponsiveGridLayout"
+				});
+				ctrlSimpleForm.addContent(new sap.m.Label({
+					text: personalInfoProfContactItem.Fieldlabel
+				}));
+				ctrlSimpleForm.addContent(new sap.m.Text({
+					text: personalInfoProfContactItem.Fieldvalue
+				}));
+
+				ctrlVerticalLayout.addContent(ctrlSimpleForm);
+				ctrlHorizontalLayout.addContent(ctrlVerticalLayout);
 			});
-
-			//		
+			_oCtrlPersonalInfoProfContactContainer.addContent(ctrlHorizontalLayout);
 
 		} else {
 			this.byId("dispStatusMsg").setText(hcm.people.profile.util.UIHelper.getResourceBundle().getText("PERSONAL_INFO_PERS_CONTACT_NO_DATA"));

@@ -6,11 +6,11 @@ sap.uxap.BlockBase.extend("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.Persona
     metadata: {
         views: {
             Collapsed: {
-                viewName: "hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoEmergencyData",
+                viewName: "hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoEmergencyDataCollapsed",
                 type: "XML"
             },
             Expanded: {
-                viewName: "hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoEmergencyData",
+                viewName: "hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoEmergencyDataExpanded",
                 type: "XML"
             }
         },

@@ -2,7 +2,7 @@ jQuery.sap.require("hcm.people.profile.util.UIHelper");
 jQuery.sap.require("hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper");
 jQuery.sap.require("sap.ui.layout.form.SimpleForm");
 
-sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoPersonDataController", {
+sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoEmergencyDataExpandedController", {
 
 	onInit: function() {
 		this.buildUI();
@@ -10,11 +10,13 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoPer
 
 	buildUI: function() {
 
-		var _oCtrlPersonalInfoPersonDataContainer = this.byId("ctrlPersonalInfoPersonDataHolder");
+		var _oCtrlPersonalInfoEmergencyDataContainer = this.byId("ctrlPersonalInfoEmergencyDataHolder");
 		var _oUIHelper = hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper;
 		var _oGroupedPersonalInfoData = _oUIHelper.getGroupedPersonalInfoData();
 
-		if (_oGroupedPersonalInfoData && _oGroupedPersonalInfoData.PERS_DATA) {
+		var _oPersonalInfoEmergencyDataGroupedBySeqNr = _oUIHelper.groupItemsPerSeqNr((_oGroupedPersonalInfoData.EMERGENCY_DATA).vals);
+
+		for (var key in _oPersonalInfoEmergencyDataGroupedBySeqNr) {
 
 			var ctrlHorizontalLayout = new sap.ui.layout.HorizontalLayout({
 				layoutData: new sap.ui.layout.GridData({
@@ -23,9 +25,9 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoPer
 				allowWrapping: true
 			});
 
-			// for each item in the personal info person data array
-			_oGroupedPersonalInfoData.PERS_DATA.vals.forEach(function(personalInfoPersonDataItem) {
+			var emergencyDataObj = _oPersonalInfoEmergencyDataGroupedBySeqNr[key].vals;
 
+			emergencyDataObj.forEach(function(personalInfoEmergencyItem) {
 				var ctrlVerticalLayout = new sap.ui.layout.VerticalLayout({
 					layoutData: new sap.ui.layout.GridData({}),
 					width: "250px"
@@ -34,22 +36,30 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoPer
 					layout: "ResponsiveGridLayout"
 				});
 				ctrlSimpleForm.addContent(new sap.m.Label({
-					text: personalInfoPersonDataItem.Fieldlabel
+					text: personalInfoEmergencyItem.Fieldlabel
 				}));
 				ctrlSimpleForm.addContent(new sap.m.Text({
-					text: personalInfoPersonDataItem.Fieldvalue
+					text: personalInfoEmergencyItem.Fieldvalue,
+					wrapping: true
 				}));
 
 				ctrlVerticalLayout.addContent(ctrlSimpleForm);
 				ctrlHorizontalLayout.addContent(ctrlVerticalLayout);
 			});
-			_oCtrlPersonalInfoPersonDataContainer.addContent(ctrlHorizontalLayout);
+			_oCtrlPersonalInfoEmergencyDataContainer.addContent(ctrlHorizontalLayout);
+			
+			//
+				var ctrlHorizontalLayoutSpacing = new sap.ui.layout.HorizontalLayout({
+				layoutData: new sap.ui.layout.GridData({
+					span: "L12 M12 S12"
+				}),
+				allowWrapping: true
+			});
+			_oCtrlPersonalInfoEmergencyDataContainer.addContent(ctrlHorizontalLayoutSpacing);
+			
+			
+			//
 
-			//		
-
-		} else {
-			this.byId("dispStatusMsg").setText(hcm.people.profile.util.UIHelper.getResourceBundle().getText("PERSONAL_INFO_PERSON_DATA_NO_DATA"));
-			this.byId("dispStatusMsg").setVisible(true);
 		}
 
 	},

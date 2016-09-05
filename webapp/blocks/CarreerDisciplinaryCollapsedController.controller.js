@@ -12,13 +12,13 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerDiscipli
 		var _oUIHelper = hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper;
 		var _oGroupedCarreerInfoData = _oUIHelper.getGroupedCarreerInfoData();
 
-		var _oCarreerInfoDisciplinaryGroupedBySeqNr = _oUIHelper.groupItemsPerSeqNr((_oGroupedCarreerInfoData.CARR_DISCIPLINARY).vals);
-
-		if (_oCarreerInfoDisciplinaryGroupedBySeqNr && Object.keys(_oCarreerInfoDisciplinaryGroupedBySeqNr).length === 0) {
+		if (!_oGroupedCarreerInfoData || !_oGroupedCarreerInfoData.CARR_DISCIPLINARY) {
 			_oCtrlCarreerDisciplinaryContainer.setVisible(false);
 			this.byId("dispStatusMsg").setText(hcm.people.profile.util.UIHelper.getResourceBundle().getText("CARREER_DISCIPLINARY_NO_DATA"));
 			this.byId("dispStatusMsg").setVisible(true);
 		} else {
+			var _oCarreerInfoDisciplinaryGroupedBySeqNr = _oUIHelper.groupItemsPerSeqNr((_oGroupedCarreerInfoData.CARR_DISCIPLINARY).vals);
+
 			if (_oCarreerInfoDisciplinaryGroupedBySeqNr && Object.keys(_oCarreerInfoDisciplinaryGroupedBySeqNr).length > 1) {
 				var subSecCarreerDisciplinary = _oUIHelper.getSubSecCarreerDisciplinary();
 				subSecCarreerDisciplinary.getBlocks()[0].setShowSubSectionMore(true);
@@ -27,20 +27,37 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerDiscipli
 
 			for (var key in _oCarreerInfoDisciplinaryGroupedBySeqNr) {
 				if (count < 1) {
-					var ctrlHoriLayout = new sap.ui.layout.HorizontalLayout();
-					var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({});
 
 					var disciplinaryObj = _oCarreerInfoDisciplinaryGroupedBySeqNr[key].vals;
-					disciplinaryObj.forEach(function(carreerDisciplinaryItem) {
-						if (carreerDisciplinaryItem.Fieldlabel !== "") {
-							ctrlSimpleForm.addContent(new sap.m.Text({
-								text: carreerDisciplinaryItem.Fieldlabel + ": " + carreerDisciplinaryItem.Fieldvalue
-							}));
-						}
+
+					var ctrlHorizontalLayout = new sap.ui.layout.HorizontalLayout({
+						layoutData: new sap.ui.layout.GridData({
+							span: "L12 M12 S12"
+						}),
+						allowWrapping: true
 					});
+
+					disciplinaryObj.forEach(function(carreerDisciplinaryItem) {
+						var ctrlVerticalLayout = new sap.ui.layout.VerticalLayout({
+							layoutData: new sap.ui.layout.GridData({}),
+							width: "250px"
+						});
+						var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
+							layout: "ResponsiveGridLayout"
+						});
+						ctrlSimpleForm.addContent(new sap.m.Label({
+							text: carreerDisciplinaryItem.Fieldlabel
+						}));
+						ctrlSimpleForm.addContent(new sap.m.Text({
+							text: carreerDisciplinaryItem.Fieldvalue,
+							wrapping: true
+						}));
+
+						ctrlVerticalLayout.addContent(ctrlSimpleForm);
+						ctrlHorizontalLayout.addContent(ctrlVerticalLayout);
+					});
+					_oCtrlCarreerDisciplinaryContainer.addContent(ctrlHorizontalLayout);
 					count++;
-					ctrlHoriLayout.addContent(ctrlSimpleForm);
-					_oCtrlCarreerDisciplinaryContainer.addContent(ctrlHoriLayout);
 				}
 			}
 		}

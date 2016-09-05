@@ -16,11 +16,22 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerRemunera
 
 		if (_oGroupedCarreerInfoData && _oGroupedCarreerInfoData.CARR_REMUNERATION) {
 
+			var ctrlHorizontalLayout = new sap.ui.layout.HorizontalLayout({
+				layoutData: new sap.ui.layout.GridData({
+					span: "L12 M12 S12"
+				}),
+				allowWrapping: true
+			});
+
 			// for each item in the carreer remuneration array
 			_oGroupedCarreerInfoData.CARR_REMUNERATION.vals.forEach(function(carreerRemunerationItem) {
+
+				var ctrlVerticalLayout = new sap.ui.layout.VerticalLayout({
+					layoutData: new sap.ui.layout.GridData({}),
+					width: "250px"
+				});
+
 				var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
-					maxContainerCols: 2,
-					editable: false,
 					layout: "ResponsiveGridLayout"
 				});
 
@@ -30,9 +41,12 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerRemunera
 				ctrlSimpleForm.addContent(new sap.m.Text({
 					text: carreerRemunerationItem.Fieldvalue
 				}));
-				_oCtrlCarreerRemunerationContainer.addContent(ctrlSimpleForm);
-			});
 
+				ctrlVerticalLayout.addContent(ctrlSimpleForm);
+				ctrlHorizontalLayout.addContent(ctrlVerticalLayout);
+
+			});
+			_oCtrlCarreerRemunerationContainer.addContent(ctrlHorizontalLayout);
 		} else {
 			this.byId("dispStatusMsg").setText(hcm.people.profile.util.UIHelper.getResourceBundle().getText("CARREER_REMUNERATION_NO_DATA"));
 			this.byId("dispStatusMsg").setVisible(true);

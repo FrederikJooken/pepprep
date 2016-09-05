@@ -16,22 +16,48 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationA
 
 		if (_oGroupedAdminSituationData && _oGroupedAdminSituationData.ADMIN_AFFECTATION) {
 
+			var ctrlHorizontalLayout = new sap.ui.layout.HorizontalLayout({
+				layoutData: new sap.ui.layout.GridData({
+					span: "L12 M12 S12"
+				}),
+				allowWrapping: true
+			});
+
 			// for each item in the affectation  array
 			_oGroupedAdminSituationData.ADMIN_AFFECTATION.vals.forEach(function(adminSituationAffectationItem) {
+			
+				var ctrlVerticalLayout = new sap.ui.layout.VerticalLayout({
+					layoutData: new sap.ui.layout.GridData({}),
+					width: "250px"
+				});
+				
+				var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
+					layout: "ResponsiveGridLayout"
+				});
+				ctrlSimpleForm.addContent(new sap.m.Label({
+					text: adminSituationAffectationItem.Fieldlabel
+				}));
+				ctrlSimpleForm.addContent(new sap.m.Text({
+					text: adminSituationAffectationItem.Fieldvalue
+				}));
+				
+				ctrlVerticalLayout.addContent(ctrlSimpleForm);
+				ctrlHorizontalLayout.addContent(ctrlVerticalLayout);
+			
 				//optie 1
-
-					var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
-						maxContainerCols: 2,
-						editable: false,
-						layout: "ResponsiveGridLayout"
-					});
-					ctrlSimpleForm.addContent(new sap.m.Label({
-						text: adminSituationAffectationItem.Fieldlabel
-					}));
-					ctrlSimpleForm.addContent(new sap.m.Text({
-						text: adminSituationAffectationItem.Fieldvalue
-					}));
-					_oCtrlAdminSituationAffectationContainer.addContent(ctrlSimpleForm);
+				/*
+									var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
+										maxContainerCols: 2,
+										editable: false,
+										layout: "ResponsiveGridLayout"
+									});
+									ctrlSimpleForm.addContent(new sap.m.Label({
+										text: adminSituationAffectationItem.Fieldlabel
+									}));
+									ctrlSimpleForm.addContent(new sap.m.Text({
+										text: adminSituationAffectationItem.Fieldvalue
+									}));
+									_oCtrlAdminSituationAffectationContainer.addContent(ctrlSimpleForm);*/
 				//end optie 1
 
 				//optie 2
@@ -107,25 +133,25 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationA
 				//end optie 5
 
 				//optie 6
-			/*	var ctrlVertLayout = new sap.ui.layout.VerticalLayout();
-				var ctrlHoriLayout = new sap.ui.layout.HorizontalLayout();
-				var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
-					maxContainerCols: 1,
-					editable: false,
-					layout: "ResponsiveGridLayout"
-				});
-				ctrlSimpleForm.addContent(new sap.m.Label({
-					text: adminSituationAffectationItem.Fieldlabel
-				}));
-				ctrlSimpleForm.addContent(new sap.m.Text({
-					text: adminSituationAffectationItem.Fieldvalue
-				}));
-				ctrlVertLayout.addContent(ctrlSimpleForm);
-				_oCtrlAdminSituationAffectationContainer.addContent(ctrlVertLayout);*/
+				/*	var ctrlVertLayout = new sap.ui.layout.VerticalLayout();
+					var ctrlHoriLayout = new sap.ui.layout.HorizontalLayout();
+					var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
+						maxContainerCols: 1,
+						editable: false,
+						layout: "ResponsiveGridLayout"
+					});
+					ctrlSimpleForm.addContent(new sap.m.Label({
+						text: adminSituationAffectationItem.Fieldlabel
+					}));
+					ctrlSimpleForm.addContent(new sap.m.Text({
+						text: adminSituationAffectationItem.Fieldvalue
+					}));
+					ctrlVertLayout.addContent(ctrlSimpleForm);
+					_oCtrlAdminSituationAffectationContainer.addContent(ctrlVertLayout);*/
 				//end optie 6
 
 			});
-
+			_oCtrlAdminSituationAffectationContainer.addContent(ctrlHorizontalLayout);
 			//		
 
 		} else {

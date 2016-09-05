@@ -12,13 +12,13 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoMed
 		var _oUIHelper = hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper;
 		var _oGroupedPersonalInfoData = _oUIHelper.getGroupedPersonalInfoData();
 
-		var _oPersonalInfoMedicalRestrictionsGroupedBySeqNr = _oUIHelper.groupItemsPerSeqNr((_oGroupedPersonalInfoData.MEDIC_RESTRICTIONS).vals);
-
-		if (_oPersonalInfoMedicalRestrictionsGroupedBySeqNr && Object.keys(_oPersonalInfoMedicalRestrictionsGroupedBySeqNr).length === 0) {
+		if (!_oGroupedPersonalInfoData || !_oGroupedPersonalInfoData.MEDIC_RESTRICTIONS) {
 			_oCtrlPersonalInfoMedicalRestrictionsContainer.setVisible(false);
-			this.byId("dispStatusMsg").setText(hcm.people.profile.util.UIHelper.getResourceBundle().getText("MEDIC_RESTRICTIONS_NO_DATA"));
+			this.byId("dispStatusMsg").setText(hcm.people.profile.util.UIHelper.getResourceBundle().getText("PERSONAL_INFO_MEDICAL_RESTRICT_NO_DATA"));
 			this.byId("dispStatusMsg").setVisible(true);
 		} else {
+			var _oPersonalInfoMedicalRestrictionsGroupedBySeqNr = _oUIHelper.groupItemsPerSeqNr((_oGroupedPersonalInfoData.MEDIC_RESTRICTIONS).vals);
+
 			if (_oPersonalInfoMedicalRestrictionsGroupedBySeqNr && Object.keys(_oPersonalInfoMedicalRestrictionsGroupedBySeqNr).length > 1) {
 				var subSecPersonalInfoMedicalRestriction = _oUIHelper.getSubSecPersonalInfoMedicalRestriction();
 				subSecPersonalInfoMedicalRestriction.getBlocks()[0].setShowSubSectionMore(true);
@@ -27,20 +27,35 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoMed
 
 			for (var key in _oPersonalInfoMedicalRestrictionsGroupedBySeqNr) {
 				if (count < 1) {
-					var ctrlHoriLayout = new sap.ui.layout.HorizontalLayout();
-					var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({});
+					var medicalRestrictionObj = _oPersonalInfoMedicalRestrictionsGroupedBySeqNr[key].vals;
+					var ctrlHorizontalLayout = new sap.ui.layout.HorizontalLayout({
+						layoutData: new sap.ui.layout.GridData({
+							span: "L12 M12 S12"
+						}),
+						allowWrapping: true
+					});
 
-					var disciplinaryObj = _oPersonalInfoMedicalRestrictionsGroupedBySeqNr[key].vals;
-					disciplinaryObj.forEach(function(personalInfoMedicRestrictionItem) {
-						if (personalInfoMedicRestrictionItem.Fieldlabel !== "") {
-							ctrlSimpleForm.addContent(new sap.m.Text({
-								text: personalInfoMedicRestrictionItem.Fieldlabel + ": " + personalInfoMedicRestrictionItem.Fieldvalue
-							}));
-						}
+					medicalRestrictionObj.forEach(function(personalInfoMedicRestrictionItem) {
+						var ctrlVerticalLayout = new sap.ui.layout.VerticalLayout({
+							layoutData: new sap.ui.layout.GridData({}),
+							width: "250px"
+						});
+						var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
+							layout: "ResponsiveGridLayout"
+						});
+						ctrlSimpleForm.addContent(new sap.m.Label({
+							text: personalInfoMedicRestrictionItem.Fieldlabel
+						}));
+						ctrlSimpleForm.addContent(new sap.m.Text({
+							text: personalInfoMedicRestrictionItem.Fieldvalue,
+							wrapping: true
+						}));
+
+						ctrlVerticalLayout.addContent(ctrlSimpleForm);
+						ctrlHorizontalLayout.addContent(ctrlVerticalLayout);
 					});
 					count++;
-					ctrlHoriLayout.addContent(ctrlSimpleForm);
-					_oCtrlPersonalInfoMedicalRestrictionsContainer.addContent(ctrlHoriLayout);
+					_oCtrlPersonalInfoMedicalRestrictionsContainer.addContent(ctrlHorizontalLayout);
 				}
 			}
 		}

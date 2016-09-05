@@ -16,11 +16,22 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerGradeCon
 
 		if (_oGroupedCarreerInfoData && _oGroupedCarreerInfoData.CARR_GRADE) {
 
+			var ctrlHorizontalLayout = new sap.ui.layout.HorizontalLayout({
+				layoutData: new sap.ui.layout.GridData({
+					span: "L12 M12 S12"
+				}),
+				allowWrapping: true
+			});
+
 			// for each item in the carreer Grade array
 			_oGroupedCarreerInfoData.CARR_GRADE.vals.forEach(function(carreerGradeItem) {
+
+				var ctrlVerticalLayout = new sap.ui.layout.VerticalLayout({
+					layoutData: new sap.ui.layout.GridData({}),
+					width: "250px"
+				});
+
 				var ctrlSimpleForm = new sap.ui.layout.form.SimpleForm({
-					maxContainerCols: 2,
-					editable: false,
 					layout: "ResponsiveGridLayout"
 				});
 				ctrlSimpleForm.addContent(new sap.m.Label({
@@ -29,8 +40,12 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerGradeCon
 				ctrlSimpleForm.addContent(new sap.m.Text({
 					text: carreerGradeItem.Fieldvalue
 				}));
-				_oCtrlCarreerGradeContainer.addContent(ctrlSimpleForm);
+
+				ctrlVerticalLayout.addContent(ctrlSimpleForm);
+				ctrlHorizontalLayout.addContent(ctrlVerticalLayout);
+
 			});
+			_oCtrlCarreerGradeContainer.addContent(ctrlHorizontalLayout);
 
 		} else {
 			this.byId("dispStatusMsg").setText(hcm.people.profile.util.UIHelper.getResourceBundle().getText("CARREER_GRADE_NO_DATA"));
