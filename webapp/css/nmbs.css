@@ -1,7 +1,9 @@
+/* header background wit */
 .sapUxAPObjectPageHeaderIdentifier, .sapUxAPObjectPageHeaderContentDesign-Light{
 	background-color: #ffffff !important;
 }
 
+/* layout for horizontal rulers in expanded views */
 .subSectionSeparator{
 	border: 0px;
 	height: 2px;
@@ -12,15 +14,18 @@
 	background-color: #f2f8fc;
 }
 
+/* position the See more / See less button 30px higher (and position relative) */
 .sapUxAPSubSectionSeeMoreContainer{
 	position: relative;
 	top: -30px;
 }
 
+/* Ensure round profile image */
 .sapHcmObjectHeaderImage, .sapMImg{
 	border-radius: 100%;
 }
 
+/* Change background color of "Report incorrect data" button in the upper right corner */
 .incorrectProfileDataFeedbackButton{
 	background-color: #f2f8fc !important;
 }
