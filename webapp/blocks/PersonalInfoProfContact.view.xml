@@ -7,10 +7,12 @@
         xmlns:suite="sap.suite.ui.commons" 
         controllerName="hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoProfContactController">
         
-        <layout:Grid id="ctrlPersonalInfoProfContactHolder" defaultSpan="L12 M12 S12" hSpacing="0">
+        <layout:Grid id="ctrlPersonalInfoProfContactHolder" defaultSpan="L12 M12 S12" defaultIndent="L1 M1 S0" hSpacing="0">
 
         </layout:Grid> 
         
-        <m:Label id="dispStatusMsg" visible="false" design="Bold" width="100%"></m:Label>
+         <layout:Grid id="dispStatusMsgGrid" defaultSpan="L12 M12 S12" defaultIndent="L1 M1 S0" hSpacing="0" visible="false">
+			<m:Label id="dispStatusMsg" design="Bold" width="100%"></m:Label>
+        </layout:Grid> 
  
 </mvc:View>

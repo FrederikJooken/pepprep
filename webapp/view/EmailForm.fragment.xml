@@ -12,8 +12,8 @@
 			<Text id="vestigingText" text="{piwikDataModel>/VestShort} - {piwikDataModel>/VestStextNlfr}"/>
 			<Label text="{i18n>EMAIL_FORM_SUPRA_VESTIGING}" id="supraVestigingLabel" labelFor="supraVestigingText"/>
 			<Text id="supraVestigingText" text="{piwikDataModel>/SupvestShort} - {piwikDataModel>/SupvestStextNlfr}"/>
-			<Label text="{i18n>EMAIL_FORM_USER}" id="userLabel" labelFor="userText"/>
-			<Text id="userText" text="{piwikDataModel>/LoggedUserId}"/>
+			<!--Label text="{i18n>EMAIL_FORM_USER}" id="userLabel" labelFor="userText"/>
+			<Text id="userText" text="{piwikDataModel>/LoggedUserId}"/-->
 			<Label text="{i18n>EMAIL_FORM_DOMAIN}" id="domainLabel" labelFor="domainText"/>
 			<Text id="domainText" text="{piwikDataModel>/DirShort}"/>
 			<Label text="{i18n>EMAIL_FORM_REQUEST_TYPE}" id="requestTypeLabel" labelFor="requestTypeText"/>
@@ -25,14 +25,14 @@
 			<Select items="{activeAppsModel>/activeApps}" id="appNameSelect" forceSelection="true">
 				<core:Item key="{activeAppsModel>Appname}" text="{activeAppsModel>Appname}"/>
 			</Select>
-			<Label id="descriptionLable" text="{i18n>EMAIL_FORM_DESCRIPTION}" labelFor="descriptionTextArea"/>
-			<TextArea id="descriptionTextArea" rows="3"/>
+			<Label id="descriptionLable" text="{i18n>EMAIL_FORM_DESCRIPTION}" labelFor="descriptionTextArea" required="true"/>
+			<TextArea id="descriptionTextArea" rows="3" liveChange="onTextAreaChange" required="true"/>
 		</sap.ui.layout.form:content>
 	</sap.ui.layout.form:SimpleForm>
 	</content>
 	<buttons>
-		<Button id="okButton" text="Send email" type="Emphasized" icon="sap-icon://email" iconFirst="true" press="onSubmitForm"/>
-		<Button id="cancelButton" text="Cancel" type="Default" icon="sap-icon://sys-cancel" iconFirst="true" press="onCancelPress"/>
+		<Button id="emailFormOKButton" text="{i18n>EMAIL_FORM_SUBMIT}" type="Emphasized" icon="sap-icon://email" iconFirst="true" press="onSubmitForm" enabled="false"/>
+		<Button id="cancelButton" text="{i18n>EMAIL_FORM_CANCEL}" type="Default" icon="sap-icon://sys-cancel" iconFirst="true" press="onCancelPress"/>
 	</buttons>
 </Dialog>
 </core:FragmentDefinition>

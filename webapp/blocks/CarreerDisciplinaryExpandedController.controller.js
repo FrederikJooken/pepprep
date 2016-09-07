@@ -44,6 +44,9 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerDiscipli
 
 			});
 			_oCtrlCarreerDisciplinaryContainer.addContent(ctrlHorizontalLayout);
+			
+			var nmbsSeparator = new sap.ui.core.HTML({content: "<hr class='subSectionSeparator'>"});
+			_oCtrlCarreerDisciplinaryContainer.addContent(nmbsSeparator);
 		}
 	},
 

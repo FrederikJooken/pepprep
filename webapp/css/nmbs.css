@@ -1,0 +1,31 @@
+.sapUxAPObjectPageHeaderIdentifier, .sapUxAPObjectPageHeaderContentDesign-Light{
+	background-color: #ffffff !important;
+}
+
+.subSectionSeparator{
+	border: 0px;
+	height: 2px;
+	background-color: #f2f8fc;
+}
+
+.sapUxAPObjectPageSectionHeader{
+	background-color: #f2f8fc;
+}
+
+.sapUxAPSubSectionSeeMoreContainer{
+	position: relative;
+	top: -30px;
+}
+
+.sapHcmObjectHeaderImage, .sapMImg{
+	border-radius: 100%;
+}
+
+.incorrectProfileDataFeedbackButton{
+	background-color: #f2f8fc !important;
+}
+
+/* Needed for IE because verticallayout topalign didn't work in IE, it does in Chrome */
+.sapUiVlt, .sapuiVlt{
+	vertical-align: top !important;
+}

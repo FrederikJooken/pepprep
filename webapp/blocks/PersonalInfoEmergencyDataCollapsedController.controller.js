@@ -18,7 +18,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoEme
 			_oCtrlPersonalInfoEmergencyDataContainer.setVisible(false);
 			this.byId("dispStatusMsg").setText(hcm.people.profile.util.UIHelper.getResourceBundle().getText(
 				"PERSONAL_INFO_EMERGENCY_DATA_NO_DATA"));
-			this.byId("dispStatusMsg").setVisible(true);
+			this.byId("dispStatusMsgGrid").setVisible(true);
 		} else {
 			var _oPersonalInfoEmergencyDataGroupedBySeqNr = _oUIHelper.groupItemsPerSeqNr((_oGroupedPersonalInfoData.EMERGENCY_DATA).vals);
 

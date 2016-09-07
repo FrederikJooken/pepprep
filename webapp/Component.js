@@ -13,6 +13,7 @@ sap.ui.component.load({
 this.hcm.people.profile.Component.extend("hcm.people.profile.ZHCM_PEP_PROFILEExt.Component", {
 	metadata: {
 		version: "1.0",
+		includes: ["css/nmbs.css"],
 		config: {
 			"sap.ca.i18Nconfigs": {
 				"bundleName": "hcm.people.profile.ZHCM_PEP_PROFILEExt.i18n.i18n"

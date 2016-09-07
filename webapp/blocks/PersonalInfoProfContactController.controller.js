@@ -48,7 +48,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoPro
 
 		} else {
 			this.byId("dispStatusMsg").setText(hcm.people.profile.util.UIHelper.getResourceBundle().getText("PERSONAL_INFO_PERS_CONTACT_NO_DATA"));
-			this.byId("dispStatusMsg").setVisible(true);
+			this.byId("dispStatusMsgGrid").setVisible(true);
 		}
 
 	},

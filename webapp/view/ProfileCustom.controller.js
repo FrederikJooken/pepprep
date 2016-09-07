@@ -40,8 +40,6 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 
 		//Get the active applicatins
 		this.getView().getModel().read("/ActiveAppsListSet", null, null, false, function(oData, oResponse) {
-			//var activeAppsDataModel = new sap.ui.model.json.JSONModel(oData.results);
-			//that.getView().setModel(activeAppsDataModel, "activeAppsModel");
 			var activeAppsJSON = {
 				"activeApps": [{}]
 			};
@@ -322,8 +320,6 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 	},
 
 	onIncorrectDataLinkPress: function(oEvent) {
-		//TODO open form for sending a mail
-
 		/*	var _oUIHelper = hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper;
 		_oUIHelper.sendEmail("a","b","c");
 */
@@ -338,7 +334,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 	onCancelPress: function() {
 		this._oDialog.close();
 	},
-
+	
 	onSubmitForm: function(oEvent) {
 		var _self = this;
 		var supportAanvraagModel = this.getView().getModel("piwikDataModel");
@@ -350,6 +346,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 		var oModel = this.getView().getModel();
 		oModel.create('/PiwikDatasetSet', supportAanvraagModel.getData(), null, function() {
 			_self._oDialog.close();
+			
 			sap.m.MessageToast.show(_self.resourseBundle.getText("EMAIL_FORM_SUBMIT_OK"));
 		}, function(errMsg) { 
 			_self._oDialog.close();
@@ -357,13 +354,14 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 		});
 
 	},
-
-	_handleBeforeOpen: function() {},
-
-	_handleAfterClose: function() {},
-
-	_handleBeforeClose: function(oEvent) {
-		var a = oEvent;
+	
+	onTextAreaChange: function(oEvent){
+			var sText = oEvent.getParameter("value");
+			sap.ui.getCore().byId("emailFormOKButton").setEnabled(sText.length > 2);
+	},
+	
+	onBeforeRendering: function(){
+		this.getView().byId("incorrectDataFeedbackButton").addStyleClass("incorrectProfileDataFeedbackButton");
 	},
 
 	onAfterRendering: function() {

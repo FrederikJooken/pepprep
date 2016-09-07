@@ -7,7 +7,7 @@
     "targetFolder": "dist",
     "sourceFolder": "webapp",
     "buildRequired": true,
-    "lastBuildDateTime": "Mon, 05 Sep 2016 07:22:23 GMT"
+    "lastBuildDateTime": "Wed, 07 Sep 2016 12:05:24 GMT"
   },
   "generation": [
     {
@@ -124,5 +124,10 @@
   "deploy": {
     "destination": "GBD",
     "name": "ZHCM_PEOP_PROF"
+  },
+  "hcpdeploy": {
+    "account": "a5d9140b4",
+    "name": "zhcmpeopprof",
+    "lastVersionWeTriedToDeploy": "1.0.1"
   }
 }

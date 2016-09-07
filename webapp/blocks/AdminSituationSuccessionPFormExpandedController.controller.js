@@ -46,6 +46,8 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationS
 
 			});
 			_oCtrlAdminSituationSuccessionPFormContainer.addContent(ctrlHorizontalLayout);
+			var nmbsSeparator = new sap.ui.core.HTML({content: "<hr class='subSectionSeparator'>"});
+			_oCtrlAdminSituationSuccessionPFormContainer.addContent(nmbsSeparator);
 		}
 
 	},

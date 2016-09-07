@@ -9,7 +9,6 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoEme
 	},
 
 	buildUI: function() {
-
 		var _oCtrlPersonalInfoEmergencyDataContainer = this.byId("ctrlPersonalInfoEmergencyDataHolder");
 		var _oUIHelper = hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper;
 		var _oGroupedPersonalInfoData = _oUIHelper.getGroupedPersonalInfoData();
@@ -46,20 +45,11 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoEme
 				ctrlVerticalLayout.addContent(ctrlSimpleForm);
 				ctrlHorizontalLayout.addContent(ctrlVerticalLayout);
 			});
+			
 			_oCtrlPersonalInfoEmergencyDataContainer.addContent(ctrlHorizontalLayout);
 			
-			//
-				var ctrlHorizontalLayoutSpacing = new sap.ui.layout.HorizontalLayout({
-				layoutData: new sap.ui.layout.GridData({
-					span: "L12 M12 S12"
-				}),
-				allowWrapping: true
-			});
-			_oCtrlPersonalInfoEmergencyDataContainer.addContent(ctrlHorizontalLayoutSpacing);
-			
-			
-			//
-
+			var nmbsSeparator = new sap.ui.core.HTML({content: "<hr class='subSectionSeparator'>"});
+			_oCtrlPersonalInfoEmergencyDataContainer.addContent(nmbsSeparator);
 		}
 
 	},

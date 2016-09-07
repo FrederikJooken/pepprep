@@ -49,7 +49,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerRemunera
 			_oCtrlCarreerRemunerationContainer.addContent(ctrlHorizontalLayout);
 		} else {
 			this.byId("dispStatusMsg").setText(hcm.people.profile.util.UIHelper.getResourceBundle().getText("CARREER_REMUNERATION_NO_DATA"));
-			this.byId("dispStatusMsg").setVisible(true);
+			this.byId("dispStatusMsgGrid").setVisible(true);
 		}
 
 	},

@@ -47,7 +47,7 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.AdminSituationU
 			_oCtrlAdminSituationUtilizationContainer.addContent(ctrlHorizontalLayout);
 		} else {
 			this.byId("dispStatusMsg").setText(hcm.people.profile.util.UIHelper.getResourceBundle().getText("ADMINSITUATION_UTILIZATION_NO_DATA"));
-			this.byId("dispStatusMsg").setVisible(true);
+			this.byId("dispStatusMsgGrid").setVisible(true);
 		}
 
 	},

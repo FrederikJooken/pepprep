@@ -25,9 +25,6 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 	var _objSubSecPersonalInfoMedicalRestriction = null;
 	var _objSubSecPersonalInfoEmergency = null;
 
-	//TODO delte _objSubSecAdminSituationSuccessionPForm + getters and setters
-	var _objSubSecTest = null;
-
 	var _objSubSecAdminSituation = null;
 	var _objSecAdminSituation = null;
 
@@ -71,16 +68,6 @@ hcm.people.profile.ZHCM_PEP_PROFILEExt.util.UIHelper = (function() {
 
 		getSubSecAdminSituationSuccessionPForm: function() {
 			return _objSubSecAdminSituationSuccessionPForm;
-		},
-
-		//TODO remove 
-		setSubSecTest: function(objSubSecTest) {
-			_objSubSecTest = objSubSecTest;
-		},
-
-		//TODO remove 
-		getSubSecTest: function() {
-			return _objSubSecTest;
 		},
 
 

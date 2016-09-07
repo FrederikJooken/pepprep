@@ -44,6 +44,9 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoMed
 				ctrlHorizontalLayout.addContent(ctrlVerticalLayout);
 			});
 			_oCtrlPersonalInfoMedicalRestrictionsContainer.addContent(ctrlHorizontalLayout);
+					
+			var nmbsSeparator = new sap.ui.core.HTML({content: "<hr class='subSectionSeparator'>"});
+			_oCtrlPersonalInfoMedicalRestrictionsContainer.addContent(nmbsSeparator);
 		}
 
 	},

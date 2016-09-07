@@ -7,6 +7,6 @@
         xmlns:suite="sap.suite.ui.commons" 
         controllerName="hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.PersonalInfoMedicalRestrictionsExpandedController">
         
-        <layout:Grid id="ctrlPersonalInfoMedicalRestrictionsHolder" defaultSpan="L12 M12 S12" hSpacing="0">
+        <layout:Grid id="ctrlPersonalInfoMedicalRestrictionsHolder" defaultSpan="L12 M12 S12" defaultIndent="L1 M1 S0" hSpacing="0">
         </layout:Grid>
 </mvc:View>
