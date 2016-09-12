@@ -34,3 +34,10 @@
 .sapUiVlt, .sapuiVlt{
 	vertical-align: top !important;
 }
+
+/* Make sub-section titles dark-grey and underline*/
+.sapUxAPObjectPageSubSectionHeaderTitle{
+	color: #555 !important;
+    /*text-decoration: underline;*/
+    font-size: 1.1rem !important;
+}
