@@ -288,14 +288,13 @@ sap.ui.controller("hcm.people.profile.ZHCM_PEP_PROFILEExt.view.ProfileCustom", {
 			/***********************************************/
 			/* CARREER -> DISCIPLINARY MEASURES subsection */
 			/***********************************************/
-			// Mag voorlopig niet getoond worden van de gegevenscommissie.
-			/*var oSubSectionCarreerDisciplinary = new sap.uxap.ObjectPageSubSection({
+			var oSubSectionCarreerDisciplinary = new sap.uxap.ObjectPageSubSection({
 				title: this.resourseBundle.getText("CARREER_DISCIPLINARY")
 			});
 			_oUIHelper.setSubSecCarreerDisciplinary(oSubSectionCarreerDisciplinary);
 			oSubSectionCarreerDisciplinary.insertBlock(new hcm.people.profile.ZHCM_PEP_PROFILEExt.blocks.CarreerDisciplinary());
 			oSectionCarreer.addSubSection(oSubSectionCarreerDisciplinary);
-			*/
+			
 			// Add carreer section to page layout
 			this.ctrlObjectPageLayout.addSection(oSectionCarreer);
 		}
